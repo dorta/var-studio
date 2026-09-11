@@ -1,0 +1,184 @@
+.benchmark-page main {
+  display: grid;
+  gap: 20px;
+  padding: 34px 22px 56px;
+}
+.benchmark-hero,
+.benchmark-panel,
+.benchmark-live-grid article {
+  background: #fff;
+  border: 1px solid #dedede;
+  border-radius: 18px;
+}
+.benchmark-hero {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  padding: 30px;
+}
+.benchmark-hero h1 {
+  font-size: clamp(38px, 5vw, 64px);
+  letter-spacing: -0.055em;
+  line-height: 1;
+  margin: 4px 0 12px;
+}
+.benchmark-hero > div > p:last-child {
+  color: #62686e;
+  margin: 0;
+}
+.benchmark-live-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.benchmark-live-grid article {
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+}
+.benchmark-live-grid article:before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: #ff5f46;
+}
+.benchmark-live-grid article:nth-child(2):before {
+  background: #00b875;
+}
+.benchmark-live-grid article:nth-child(3):before {
+  background: #8b5cf6;
+}
+.benchmark-live-grid article:nth-child(4):before {
+  background: #5f7ea8;
+}
+.benchmark-live-grid span {
+  color: #70767b;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+.benchmark-live-grid strong {
+  display: block;
+  font-size: 32px;
+  letter-spacing: -0.04em;
+  margin: 8px 0 2px;
+}
+.benchmark-live-grid small {
+  color: #858a8e;
+}
+.benchmark-panel {
+  padding: 28px;
+}
+.benchmark-panel-head,
+.gpu-demos-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.benchmark-panel h2,
+.gpu-demos-head h2 {
+  margin: 2px 0 5px;
+}
+.benchmark-panel-head small,
+.gpu-demos-head small {
+  color: #73797e;
+}
+.benchmark-legend {
+  display: flex;
+  gap: 15px;
+}
+.benchmark-legend span {
+  align-items: center;
+  color: #666;
+  display: flex;
+  font-size: 10px;
+  gap: 6px;
+}
+.benchmark-legend i {
+  background: #999;
+  border-radius: 50%;
+  height: 8px;
+  width: 8px;
+}
+.benchmark-legend .cpu {
+  background: #ff5f46;
+}
+.benchmark-legend .gpu {
+  background: #00b875;
+}
+.benchmark-legend .npu {
+  background: #8b5cf6;
+}
+.benchmark-legend .memory {
+  background: #5f7ea8;
+}
+.benchmark-chart {
+  height: 330px;
+  margin-top: 20px;
+}
+.benchmark-chart svg {
+  display: block;
+  height: 100%;
+  overflow: visible;
+  width: 100%;
+}
+.benchmark-grid {
+  stroke: #e5e5e5;
+  stroke-width: 1;
+}
+.benchmark-axis {
+  fill: #777;
+  font:
+    10px Arial,
+    sans-serif;
+}
+.chart-note {
+  border-top: 1px solid #e8e8e8;
+  color: #777;
+  font-size: 10px;
+  margin: 0;
+  padding-top: 14px;
+}
+.benchmark-panel > .gpu-demo-list {
+  margin-top: 20px;
+}
+.benchmark-page > footer {
+  color: #757b80;
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
+  padding: 20px 28px;
+}
+@media (max-width: 900px) {
+  .benchmark-live-grid {
+    grid-template-columns: 1fr;
+  }
+  .benchmark-panel-head,
+  .gpu-demos-head {
+    flex-direction: column;
+  }
+  .benchmark-chart {
+    height: 270px;
+  }
+}
+@media (max-width: 620px) {
+  .benchmark-page main {
+    padding: 20px 12px 40px;
+  }
+  .benchmark-hero,
+  .benchmark-panel {
+    padding: 20px;
+  }
+  .benchmark-hero {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .benchmark-chart {
+    height: 230px;
+  }
+  .benchmark-legend {
+    flex-wrap: wrap;
+  }
+}

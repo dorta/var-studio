@@ -1,0 +1,193 @@
+name: Verify and release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify source and container
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      - name: Check line length
+        run: ./scripts/check-line-length
+
+      - name: Check SPDX licensing
+        run: |
+          docker run --rm \
+            --volume "$PWD:/data" \
+            fsfe/reuse:6.2.0 lint
+
+      - name: Check shell and JavaScript syntax
+        shell: bash
+        run: |
+          sh -n bootstrap.sh
+          sh -n install.sh
+          sh -n scripts/var-studio
+          sh -n scripts/var-studio-stack
+          for file in cmd/dashboard/web/*.js; do
+            node --check "$file"
+          done
+
+      - name: Run Go checks
+        run: |
+          go vet ./...
+          go test ./...
+
+      - name: Build Linux binaries
+        shell: bash
+        env:
+          CGO_ENABLED: "0"
+        run: |
+          for arch in amd64 arm64; do
+            GOOS=linux GOARCH="$arch" go build \
+              -trimpath \
+              -o "/tmp/var-studio-$arch" \
+              ./cmd/dashboard
+          done
+          GOOS=linux GOARCH=arm GOARM=7 go build \
+            -trimpath \
+            -o /tmp/var-studio-armv7 \
+            ./cmd/dashboard
+
+      - name: Build container image
+        run: docker build --tag var-studio:ci .
+
+  release:
+    name: Publish latest release
+    needs: verify
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: var-studio-release
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out release tag
+        uses: actions/checkout@v7
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      - name: Verify tag matches VERSION
+        shell: bash
+        run: |
+          version="$(tr -d '[:space:]' < VERSION)"
+          tag="${GITHUB_REF_NAME}"
+          if [ "$tag" != "v$version" ]; then
+            printf 'Tag %s does not match VERSION %s.\n' "$tag" "$version"
+            exit 1
+          fi
+
+      - name: Publish release
+        shell: bash
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          version="${tag#v}"
+          notes="$RUNNER_TEMP/release-notes.md"
+          assets="$RUNNER_TEMP/release-assets"
+          mkdir -p "$assets"
+          CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build \
+            -trimpath -ldflags="-s -w" \
+            -o "$assets/var-studio-linux-arm64" \
+            ./cmd/dashboard
+          CGO_ENABLED=0 GOOS=linux GOARCH=arm GOARM=7 go build \
+            -trimpath -ldflags="-s -w" \
+            -o "$assets/var-studio-linux-armv7" \
+            ./cmd/dashboard
+          (
+            cd "$assets"
+            sha256sum var-studio-linux-* >SHA256SUMS
+          )
+          {
+            printf '## Install\n\n'
+            printf 'Run as root on a supported Variscite ARM board.\n\n'
+            printf '```sh\n'
+            printf 'curl -kfsSL '
+            printf 'https://github.com/dorta/var-studio/raw/main/install.sh'
+            printf ' | sh\n'
+            printf '```\n\n'
+            printf '> [!TIP]\n'
+            printf '> Run `var-studio url` to open the current dashboard '
+            printf 'address. DHCP may change it after reboot.\n\n'
+            printf '## Commands\n\n'
+            printf '| Command | Action |\n'
+            printf '| --- | --- |\n'
+            printf '| `var-studio status` | Show health and containers |\n'
+            printf '| `var-studio upgrade` | Install the latest version |\n'
+            printf '| `var-studio restart` | Restart all services |\n'
+            printf '| `var-studio uninstall` | Completely remove Studio |\n\n'
+            printf '**Requires:** a supported Variscite ARM board with Docker, '
+            printf 'systemd, curl, a SHA256 utility, and internet access.\n\n'
+            printf 'The ARM binary is verified with SHA256 after download. '
+            printf 'The container image is assembled locally on the board.\n'
+          } >"$notes"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release delete "$tag" --yes
+          fi
+          gh release create "$tag" \
+            --latest \
+            --notes-file "$notes" \
+            --title "Variscite Studio $version" \
+            --verify-tag
+          gh release upload "$tag" \
+            bootstrap.sh \
+            install.sh \
+            LICENSE \
+            NOTICE \
+            Dockerfile.runtime \
+            "$assets/var-studio-linux-arm64" \
+            "$assets/var-studio-linux-armv7" \
+            "$assets/SHA256SUMS" \
+            --clobber
+
+      - name: Remove previous releases and tags
+        shell: bash
+        run: |
+          current="${GITHUB_REF_NAME}"
+          gh release list \
+            --limit 100 \
+            --json tagName \
+            --jq '.[].tagName' |
+          while IFS= read -r old; do
+            if [ -n "$old" ] && [ "$old" != "$current" ]; then
+              gh release delete "$old" \
+                --cleanup-tag \
+                --yes
+            fi
+          done
+          git ls-remote \
+            --refs \
+            --tags origin 'v*' |
+          while read -r _ ref; do
+            old="${ref#refs/tags/}"
+            if [ "$old" != "$current" ]; then
+              path="repos/${GITHUB_REPOSITORY}/git/refs/tags/$old"
+              gh api --method DELETE "$path"
+            fi
+          done

@@ -1,0 +1,348 @@
+#!/bin/sh
+set -eu
+
+install_dir="${VAR_STUDIO_INSTALL_DIR:-/opt/var-studio}"
+config_file="${VAR_STUDIO_CONFIG:-/etc/default/var-studio}"
+service="var-studio-stack.service"
+
+fail() {
+  printf 'VAR-Studio: %s\n' "$*" >&2
+  exit 1
+}
+need_root() { [ "$(id -u)" -eq 0 ] || fail "this command must be run as root"; }
+load_config() {
+  [ -r "$config_file" ] && . "$config_file"
+  VAR_STUDIO_VERSION="${VAR_STUDIO_VERSION:-unknown}"
+  VAR_STUDIO_IMAGE="${VAR_STUDIO_IMAGE:-var-studio:local}"
+}
+setup_style() {
+  interactive=false
+  bold=''
+  dim=''
+  green=''
+  yellow=''
+  red=''
+  reset=''
+  if [ -t 1 ] && [ "${NO_COLOR:-}" = "" ]; then
+    interactive=true
+    bold='\033[1m'
+    dim='\033[2m'
+    green='\033[32m'
+    yellow='\033[33m'
+    red='\033[31m'
+    reset='\033[0m'
+  fi
+}
+primary_ip() {
+  address="$(ip -4 route get 1.1.1.1 2>/dev/null | awk '
+    {
+      for (field = 1; field <= NF; field++) {
+        if ($field == "src") {
+          print $(field + 1)
+          exit
+        }
+      }
+    }')"
+  if [ -z "$address" ]; then
+    address="$(hostname -I 2>/dev/null | awk '{print $1}')"
+  fi
+  printf '%s\n' "${address:-BOARD-IP}"
+}
+print_rule() {
+  printf '%s\n' \
+    '--------------------------------------------------------'
+}
+print_field() {
+  printf '  %-12s %b%s%b\n' "$1" "${3:-}" "$2" "$reset"
+}
+print_urls() {
+  port="${VAR_STUDIO_PORT:-9090}"
+  address="$(primary_ip)"
+  print_field 'Network' "http://$address:$port/"
+  print_field 'mDNS' "http://$(hostname).local:$port/"
+}
+urls() {
+  setup_style
+  print_urls
+}
+show_status() {
+  load_config
+  setup_style
+  printf '\n%bVAR-Studio Board Diagnostics%b\n' "$bold" "$reset"
+  printf '%bVersion %s%b\n' "$dim" "$VAR_STUDIO_VERSION" "$reset"
+  print_rule
+  service_state="$(systemctl show "$service" \
+    --property=ActiveState --value 2>/dev/null || true)"
+  container_state="$(docker inspect --format '{{.State.Running}}' \
+    var-studio 2>/dev/null || true)"
+  if [ "$service_state" = active ] && [ "$container_state" = true ]; then
+    state='RUNNING'
+    state_color="$green"
+  elif [ "$service_state" = activating ]; then
+    state='STARTING'
+    state_color="$yellow"
+  elif [ "$service_state" = active ]; then
+    state='DEGRADED'
+    state_color="$red"
+  elif [ "$service_state" = failed ]; then
+    state='FAILED'
+    state_color="$red"
+  elif [ -e "$install_dir" ]; then
+    state='STOPPED'
+    state_color="$yellow"
+  else
+    state='NOT INSTALLED'
+    state_color="$red"
+    print_field 'Status' "$state" "$state_color"
+    print_rule
+    exit 1
+  fi
+  printf '\n%bSYSTEM%b\n' "$bold" "$reset"
+  print_field 'Status' "$state" "$state_color"
+  print_field 'Service' "$service"
+  print_field 'Image' "$VAR_STUDIO_IMAGE"
+  printf '\n%bDASHBOARD%b\n' "$bold" "$reset"
+  print_urls
+  printf '\n%bCONTAINERS%b\n' "$bold" "$reset"
+  printf '  %-22s %-10s %s\n' 'NAME' 'STATE' 'DETAILS'
+  docker ps -a \
+    --filter 'label=com.variscite.var-studio=true' \
+    --format '{{.Names}}|{{.State}}|{{.Status}}' 2>/dev/null | \
+    while IFS='|' read -r name state details; do
+      case "$state" in
+        running) color="$green" ;;
+        exited | dead) color="$red" ;;
+        *) color="$yellow" ;;
+      esac
+      printf '  %-22s %b%-10s%b %s\n' \
+        "$name" "$color" "$state" "$reset" "$details"
+    done
+  print_rule
+  printf '\n'
+}
+
+render_removal() {
+  marker="$1"
+  marker_color="${2:-}"
+  elapsed=$(($(date +%s) - removal_started))
+  minutes=$((elapsed / 60))
+  seconds=$((elapsed % 60))
+  if [ "$removal_drawn" = true ]; then
+    printf '\r\033[1A'
+  fi
+  printf '\r\033[2K  '
+  position=1
+  while [ "$position" -le "$removal_total" ]; do
+    if [ "$position" -lt "$removal_step" ]; then
+      printf '%b%02d%b  ' "$green" "$position" "$reset"
+    elif [ "$position" -eq "$removal_step" ]; then
+      printf '%b[%02d]%b  ' "$bold" "$position" "$reset"
+    else
+      printf '%b%02d%b  ' "$dim" "$position" "$reset"
+    fi
+    position=$((position + 1))
+  done
+  printf '\n'
+  printf '\r\033[2K  %-40s %b%-6s%b %02d:%02d' \
+    "$removal_label" "$marker_color" "$marker" "$reset" \
+    "$minutes" "$seconds"
+  removal_drawn=true
+}
+
+clear_removal() {
+  if [ "$interactive" = true ] && [ "$removal_drawn" = true ]; then
+    printf '\r\033[2K\033[1A\r\033[2K'
+    removal_drawn=false
+  fi
+}
+
+removal_failed() {
+  printf '\n%bRemoval failed%b\n' "$red" "$reset" >&2
+  printf '  %s\n' "$*" >&2
+  if [ -s "$removal_log" ]; then
+    printf '\n  Last log entries:\n' >&2
+    tail -n 12 "$removal_log" | sed 's/^/    /' >&2
+    printf '\n  Full log: %s\n' "$removal_log" >&2
+  fi
+  exit 1
+}
+
+run_removal_step() {
+  removal_label="$1"
+  shift
+  removal_step=$((removal_step + 1))
+  removal_started="$(date +%s)"
+  if [ "$interactive" = false ]; then
+    printf '  [%s/%s] %-34s' \
+      "$removal_step" "$removal_total" "$removal_label"
+  fi
+  "$@" >>"$removal_log" 2>&1 &
+  task_pid=$!
+  frame=0
+  while [ "$interactive" = true ] && \
+    kill -0 "$task_pid" 2>/dev/null; do
+    case "$frame" in
+      0) marker='|' ;;
+      1) marker='/' ;;
+      2) marker='-' ;;
+      *) marker='\' ;;
+    esac
+    render_removal "$marker"
+    frame=$(((frame + 1) % 4))
+    sleep 1
+  done
+  if wait "$task_pid"; then
+    if [ "$interactive" = true ]; then
+      render_removal 'OK' "$green"
+    else
+      elapsed=$(($(date +%s) - removal_started))
+      printf ' %bDONE%b  %ss\n' "$green" "$reset" "$elapsed"
+    fi
+  else
+    result=$?
+    if [ "$interactive" = true ]; then
+      render_removal 'FAILED' "$red"
+      printf '\n'
+    else
+      printf ' %bFAILED%b\n' "$red" "$reset"
+    fi
+    removal_failed "$removal_label returned exit code $result"
+  fi
+}
+
+stop_studio_services() {
+  systemctl disable --now var-studio-stack.service \
+    var-studio-demo-runner.service \
+    var-studio-camera-runner.service || true
+}
+
+remove_studio_docker() {
+  if [ -x "$install_dir/bin/var-studio-stack" ]; then
+    "$install_dir/bin/var-studio-stack" remove || true
+  fi
+  for resource in $(docker ps -aq \
+    --filter 'label=com.variscite.var-studio=true'); do
+    docker rm -f "$resource" || true
+  done
+  for resource in $(docker volume ls -q \
+    --filter 'label=com.variscite.var-studio=true'); do
+    docker volume rm "$resource" || true
+  done
+  for resource in $(docker network ls -q \
+    --filter 'label=com.variscite.var-studio=true'); do
+    docker network rm "$resource" || true
+  done
+}
+
+remove_studio_image() {
+  docker image rm "$VAR_STUDIO_IMAGE" || true
+}
+
+remove_studio_services() {
+  rm -f /etc/systemd/system/var-studio-stack.service
+  rm -f /etc/systemd/system/var-studio-demo-runner.service
+  rm -f /etc/systemd/system/var-studio-camera-runner.service
+  rm -f "$config_file"
+  systemctl daemon-reload
+  systemctl reset-failed || true
+}
+
+remove_studio_data() {
+  rm -rf "$install_dir"
+  rm -rf /run/var-studio-demo /run/var-studio-camera
+  rm -rf /var/log/var-studio
+}
+
+remove_studio_command() {
+  rm -f /usr/bin/var-studio
+  rm -f /usr/local/bin/var-studio
+  rm -f /usr/local/sbin/var-studio
+}
+
+uninstall_studio() {
+  need_root
+  load_config
+  setup_style
+  if [ "${1:-}" != "--yes" ]; then
+    [ -t 0 ] || fail \
+      "use 'var-studio uninstall --yes' for non-interactive removal"
+    printf '\n%bVAR-Studio%b\n' "$bold" "$reset"
+    printf 'Board Diagnostics Removal\n'
+    printf '%b(c) 2026 Variscite Ltd.%b\n\n' "$dim" "$reset"
+    printf '  This removes VAR-Studio services, data, Docker resources\n'
+    printf '  and the %s image. Other Docker workloads are preserved.\n' \
+      "$VAR_STUDIO_IMAGE"
+    printf '\n  Continue? [y/N] '
+    read -r answer
+    case "$answer" in y | Y | yes | YES) ;; *)
+      printf '\n  No changes were made.\n\n'
+      exit 0
+      ;;
+    esac
+  else
+    printf '\n%bVAR-Studio%b\n' "$bold" "$reset"
+    printf 'Board Diagnostics Removal\n'
+    printf '%b(c) 2026 Variscite Ltd.%b\n\n' "$dim" "$reset"
+  fi
+  removal_total=6
+  removal_step=0
+  removal_drawn=false
+  removal_log="/tmp/var-studio-uninstall.$$"
+  : >"$removal_log"
+  run_removal_step 'Stopping system services' stop_studio_services
+  run_removal_step 'Removing Docker resources' remove_studio_docker
+  run_removal_step 'Removing container image' remove_studio_image
+  run_removal_step 'Removing system integration' remove_studio_services
+  run_removal_step 'Removing application data' remove_studio_data
+  run_removal_step 'Removing command-line tools' remove_studio_command
+  clear_removal
+  rm -f "$removal_log"
+  printf '\n%bVAR-Studio removed%b\n\n' "$green" "$reset"
+  printf '  %-12s %s\n' 'Status' 'NOT INSTALLED'
+  printf '  %-12s %s\n\n' 'Docker' 'Other workloads preserved'
+}
+
+command="${1:-status}"
+[ "$#" -eq 0 ] || shift
+case "$command" in
+  status) show_status ;;
+  version | --version | -v)
+    load_config
+    printf 'VAR-Studio %s\n' "$VAR_STUDIO_VERSION"
+    ;;
+  url | open)
+    load_config
+    urls
+    ;;
+  start | stop | restart)
+    need_root
+    systemctl "$command" "$service"
+    [ "$command" = stop ] || show_status
+    ;;
+  logs)
+    if [ -n "${1:-}" ]; then exec docker logs --tail "$1" -f var-studio; \
+      else exec docker logs -f var-studio; fi
+    ;;
+  update | upgrade)
+    need_root
+    load_config
+    repository="${VAR_STUDIO_REPOSITORY:-dorta/var-studio}"
+    channel="${VAR_STUDIO_CHANNEL:-main}"
+    raw_base="${VAR_STUDIO_RAW_BASE:-https://raw.githubusercontent.com/$repository/$channel}"
+    export VAR_STUDIO_IMAGE
+    VAR_STUDIO_REPOSITORY="$repository"
+    VAR_STUDIO_VERSION="$channel"
+    VAR_STUDIO_RAW_BASE="$raw_base"
+    export VAR_STUDIO_REPOSITORY VAR_STUDIO_VERSION VAR_STUDIO_RAW_BASE
+    exec sh -c '
+      curl -kfsSL --retry 5 --retry-delay 2 --connect-timeout 15 \
+        "$VAR_STUDIO_RAW_BASE/install.sh" | sh
+    '
+    ;;
+  uninstall) uninstall_studio "${1:-}" ;;
+  help | --help | -h)
+    printf '%s\n' 'Usage: var-studio COMMAND' '' 'Commands:' \
+      '  status             Show installation, containers and dashboard URLs' '  version            Show the installed version' '  url                Show browser URLs for this board' '  start|stop|restart Manage the background service' '  logs [LINES]       Follow dashboard logs' '  upgrade            Install the latest configured release' '  update             Alias for upgrade' '  uninstall [--yes]  Completely remove VAR-Studio' '  help               Show this help'
+    ;;
+  *) fail "unknown command '$command' (try: var-studio help)" ;;
+esac

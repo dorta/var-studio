@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      if (window.top === window.self)
+        window.location.replace("/lab.html?view=camera");
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Camera · VAR-Studio</title>
+    <link rel="icon" type="image/png" href="/variscite-favicon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <link rel="stylesheet" href="/brand.css" />
+    <link rel="stylesheet" href="/camera.css" />
+  </head>
+  <body>
+    <div class="shell camera-page">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="VAR-Studio dashboard"
+          ><img
+            class="brand-logo"
+            src="/variscite-logo-black.svg"
+            alt="Variscite"
+          /><span class="brand-product"
+            ><strong>Board Diagnostics</strong><small>VAR-STUDIO</small></span
+          ></a
+        >
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/">Dashboard</a><a href="/hardware.html">Hardware</a
+          ><a href="/bsp.html">Board Support Package</a
+          ><a href="/lab.html">Lab</a><a href="/diagnostics.html">Diagnostics</a
+          ><a class="support-nav" href="/support.html">Support</a>
+        </nav>
+        <div class="status">
+          <span class="pulse"></span><span id="connection">Connecting</span
+          ><time id="clock">--:--:--</time>
+        </div>
+      </header>
+      <main>
+        <section class="camera-hero">
+          <div>
+            <p class="eyebrow">VISION DIAGNOSTICS</p>
+            <h1>Camera</h1>
+            <p>
+              Inspect V4L2 devices and validate a connected camera with a local
+              live view.
+            </p>
+          </div>
+          <button id="refresh" type="button">Refresh devices</button>
+        </section>
+        <section class="camera-layout">
+          <article class="camera-preview">
+            <header>
+              <div>
+                <p class="eyebrow">LIVE PREVIEW</p>
+                <h2 id="preview-title">No camera selected</h2>
+              </div>
+              <span id="live-badge" class="camera-badge">STANDBY</span>
+            </header>
+            <div id="preview-stage" class="preview-stage empty">
+              <div id="preview-empty" class="preview-empty">
+                <span class="camera-glyph" aria-hidden="true"></span
+                ><strong>Live view is not running</strong>
+                <p>Select an available capture device below.</p>
+              </div>
+              <img id="camera-stream" alt="Live camera stream" />
+            </div>
+            <footer>
+              <p>Streaming stays on this board and starts only on request.</p>
+              <button id="close-stream" type="button" hidden>
+                Close live view
+              </button>
+            </footer>
+          </article>
+          <aside class="camera-status-card">
+            <span id="status-icon" class="status-orb neutral"></span>
+            <p class="eyebrow">CAMERA STATUS</p>
+            <h2 id="camera-status">Checking hardware</h2>
+            <p id="camera-message">Reading V4L2 capabilities…</p>
+          </aside>
+        </section>
+        <section class="device-section">
+          <header>
+            <div>
+              <p class="eyebrow">VIDEO DEVICES</p>
+              <h2>Detected hardware</h2>
+            </div>
+            <span id="device-count" class="camera-badge">—</span>
+          </header>
+          <div id="device-list" class="device-list">
+            <p class="camera-loading">Inspecting video devices…</p>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <span>© 2025-2026 Variscite Ltd.</span>
+        <span><a href="https://github.com/dorta/var-studio/blob/main/LICENSE"
+          >Apache License 2.0</a> · Local data · no external telemetry</span>
+      </footer>
+    </div>
+    <script src="/camera.js" defer></script>
+  </body>
+</html>

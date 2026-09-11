@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>VAR-Studio · Board Diagnostics</title>
+    <link rel="icon" type="image/png" href="/variscite-favicon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <link rel="stylesheet" href="/brand.css" />
+  </head>
+  <body class="dashboard-loading">
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="VAR-Studio dashboard">
+          <img
+            class="brand-logo"
+            src="/variscite-logo-black.svg"
+            alt="Variscite"
+          />
+          <span class="brand-product"
+            ><strong>Board Diagnostics</strong><small>VAR-STUDIO</small></span
+          >
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/" aria-current="page">Dashboard</a>
+          <a href="/hardware.html">Hardware</a>
+          <a href="/bsp.html">Board Support Package</a>
+          <a href="/lab.html">Lab</a><a href="/diagnostics.html">Diagnostics</a>
+          <a class="support-nav" href="/support.html">Support</a>
+        </nav>
+        <div class="status">
+          <span class="pulse"></span><span id="connection">Connecting</span
+          ><time id="clock">--:--:--</time>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div>
+            <p class="eyebrow">ACTIVE DEVICE</p>
+            <h1 id="hostname" class="skeleton-copy">Loading…</h1>
+            <p id="model" class="model skeleton-copy">
+              Reading Device Tree information
+            </p>
+            <div class="chips">
+              <span id="arch" class="skeleton-copy">—</span
+              ><span id="distro" class="skeleton-copy">—</span
+              ><span id="uptime" class="skeleton-copy">—</span>
+            </div>
+            <div class="active-addresses">
+              <img src="/icons/network.svg" alt="" />
+              <div>
+                <span>ACTIVE NETWORK</span>
+                <div
+                  id="active-address-list"
+                  class="active-address-list skeleton-copy"
+                >
+                  Detecting addresses…
+                </div>
+              </div>
+              <a href="/hardware.html#network-interfaces">
+                View network details
+              </a>
+            </div>
+            <div id="product-meta" class="hero-product-meta">
+              <span class="skeleton-copy">System on module</span>
+              <span class="skeleton-copy">Carrier board</span>
+              <span class="skeleton-copy">Detection result</span>
+            </div>
+            <div id="product-actions" class="product-actions">
+              <span class="skeleton-button"></span>
+              <span class="skeleton-button"></span>
+              <span class="skeleton-button"></span>
+              <span class="skeleton-button"></span>
+              <span class="skeleton-button"></span>
+            </div>
+          </div>
+          <div class="hero-aside">
+            <div class="device-showcase">
+              <img id="product-image" class="product-image hidden" alt="" />
+            </div>
+            <div id="hero-health" class="hero-health offline">
+              <div class="health-ring">
+                <span id="health-connection">CONNECTING</span>
+              </div>
+              <p>Board health</p>
+              <strong id="health-status">Checking</strong
+              ><small id="health-reason">Evaluating live diagnostics</small>
+            </div>
+          </div>
+        </section>
+
+        <dialog id="product-modal" class="product-modal">
+          <div class="product-modal-head">
+            <div>
+              <p>VARISCITE PRODUCT</p>
+              <h2 id="product-modal-title">Product information</h2>
+            </div>
+            <button
+              id="product-modal-close"
+              type="button"
+              aria-label="Close product information"
+            >
+              ×
+            </button>
+          </div>
+          <p
+            id="product-modal-description"
+            class="product-modal-description"
+          ></p>
+          <dl id="product-modal-facts" class="product-modal-facts"></dl>
+        </dialog>
+
+        <section class="metrics-grid">
+          <article class="metric accent-blue">
+            <div class="metric-head">
+              <span>CPU</span><b id="cpu" class="skeleton-copy">0%</b>
+            </div>
+            <p id="load" class="skeleton-copy">Load —</p>
+            <div
+              id="cpu-spark"
+              class="spark"
+              aria-label="CPU usage history"
+            ></div>
+          </article>
+          <article class="metric accent-violet">
+            <div class="metric-head">
+              <span>MEMORY</span
+              ><b id="memory" class="skeleton-copy">0%</b>
+            </div>
+            <p id="memory-detail" class="skeleton-copy">—</p>
+            <div
+              id="memory-history"
+              class="metric-history"
+              aria-label="Memory usage since boot"
+            ></div>
+          </article>
+          <article class="metric accent-green">
+            <div class="metric-head">
+              <span>STORAGE</span
+              ><b id="storage" class="skeleton-copy">0%</b>
+            </div>
+            <p id="storage-detail" class="skeleton-copy">—</p>
+            <div class="progress"><i id="storage-bar"></i></div>
+          </article>
+          <article class="metric accent-orange">
+            <div class="metric-head">
+              <span>TEMPERATURE</span
+              ><b id="temperature" class="skeleton-copy">—</b>
+            </div>
+            <div id="thermal-summary" class="thermal-summary">
+              <span class="skeleton-row"></span>
+              <span class="skeleton-row"></span>
+            </div>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <section
+            class="performance-overview span-3"
+            aria-labelledby="performance-overview-title"
+          >
+            <div class="performance-overview-head">
+              <div>
+                <p>PERFORMANCE</p>
+                <h2 id="performance-overview-title">System performance</h2>
+                <small
+                  >CPU, GPU, NPU and memory history on a synchronized
+                  timeline</small
+                >
+              </div>
+              <div class="range-selector" aria-label="Metrics history range">
+                <button type="button" data-range="hour" class="active">
+                  1 hour</button
+                ><button type="button" data-range="day">24 hours</button
+                ><button type="button" data-range="week">7 days</button
+                ><button type="button" data-range="month">30 days</button
+                ><button type="button" data-range="boot">Since boot</button>
+              </div>
+            </div>
+            <div class="performance-grid">
+              <article class="panel performance-card">
+                <div class="panel-title">
+                  <div>
+                    <p>PROCESSOR</p>
+                    <h2>CPU history</h2>
+                    <small id="history-range" class="panel-subtitle"
+                      >Collecting history since boot</small
+                    >
+                  </div>
+                  <span id="core-count" class="tag">— CORES</span>
+                </div>
+                <div
+                  id="cpu-history"
+                  class="history-chart"
+                  aria-label="CPU usage per core since boot"
+                ></div>
+                <div id="cpu-legend" class="chart-legend"></div>
+              </article>
+              <article class="panel performance-card" id="gpu-panel">
+                <div class="panel-title">
+                  <div>
+                    <p>PERFORMANCE</p>
+                    <h2>GPU history</h2>
+                    <small id="gpu-history-range" class="panel-subtitle"
+                      >Waiting for the optional gputop collector</small
+                    >
+                  </div>
+                  <span id="gpu-status" class="tag">DETECTING</span>
+                </div>
+                <div
+                  id="gpu-history-chart"
+                  class="history-chart"
+                  aria-label="GPU usage and memory controller history"
+                ></div>
+                <div id="gpu-legend" class="chart-legend"></div>
+              </article>
+              <article class="panel performance-card" id="npu-panel">
+                <div class="panel-title">
+                  <div>
+                    <p>AI ACCELERATOR</p>
+                    <h2>NPU history</h2>
+                    <small id="npu-history-range" class="panel-subtitle"
+                      >Detecting a supported neural accelerator</small
+                    >
+                  </div>
+                  <div class="accelerator-tags">
+                    <span id="npu-model" class="tag">NPU</span
+                    ><span id="npu-clock" class="tag">— MHz</span>
+                  </div>
+                </div>
+                <div
+                  id="npu-history-chart"
+                  class="history-chart npu-history-chart"
+                  aria-label="NPU utilization history"
+                ></div>
+                <div id="npu-legend" class="chart-legend"></div>
+              </article>
+              <article class="panel performance-card">
+                <div class="panel-title">
+                  <div>
+                    <p>PERFORMANCE</p>
+                    <h2>Memory history</h2>
+                    <small id="memory-history-range" class="panel-subtitle"
+                      >Collecting history since boot</small
+                    >
+                  </div>
+                  <span id="memory-current" class="tag">— USED</span>
+                </div>
+                <div
+                  id="memory-history-chart"
+                  class="history-chart memory-history-chart"
+                  aria-label="Memory usage since boot"
+                ></div>
+                <div class="chart-legend memory-legend">
+                  <span
+                    ><i></i>Memory used <b id="memory-history-value">—</b></span
+                  >
+                </div>
+              </article>
+            </div>
+          </section>
+        </section>
+      </main>
+      <footer>
+        <span>© 2025-2026 Variscite Ltd.</span>
+        <span><a href="https://github.com/dorta/var-studio/blob/main/LICENSE"
+          >Apache License 2.0</a> · Local data · no external telemetry</span>
+      </footer>
+    </div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>

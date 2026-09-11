@@ -1,0 +1,67 @@
+.hardware-table tbody tr {
+  cursor: pointer;
+  transition:
+    background 0.12s,
+    color 0.12s;
+}
+.hardware-table tbody tr:focus {
+  outline: 1px solid rgba(54, 169, 255, 0.45);
+  outline-offset: -1px;
+}
+.hardware-table tbody tr.selected {
+  background: linear-gradient(
+    90deg,
+    rgba(54, 169, 255, 0.18),
+    rgba(54, 169, 255, 0.06)
+  );
+}
+.hardware-table tbody tr.selected td:first-child {
+  box-shadow: inset 2px 0 var(--blue);
+  color: #e8f6ff;
+}
+.row-inspector {
+  border: 1px solid rgba(149, 181, 215, 0.1);
+  border-top: 0;
+  background: rgba(4, 15, 25, 0.34);
+  padding: 14px 16px;
+  border-radius: 0 0 7px 7px;
+}
+.row-inspector h4 {
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 11px;
+}
+.row-inspector dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 24px;
+  margin: 0;
+}
+.row-inspector dl div {
+  display: grid;
+  grid-template-columns: minmax(90px, 0.45fr) 1fr;
+  gap: 12px;
+  border-bottom: 1px solid rgba(149, 181, 215, 0.06);
+  padding: 5px 0;
+}
+.row-inspector dt {
+  font-size: 10px;
+  color: #738ba2;
+}
+.row-inspector dd {
+  font:
+    10px ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+  color: #c3d4e4;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 750px) {
+  .row-inspector dl {
+    grid-template-columns: 1fr;
+  }
+}

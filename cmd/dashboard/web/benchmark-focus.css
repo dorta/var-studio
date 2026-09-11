@@ -1,0 +1,301 @@
+body:has(.benchmark-focus:not(.hidden)) {
+  overflow: hidden;
+}
+.benchmark-phase {
+  fill: #ff5f4610;
+}
+.benchmark-marker {
+  stroke: #ff5f46;
+  stroke-dasharray: 4 4;
+  stroke-width: 1.2;
+}
+.benchmark-marker-label {
+  fill: #ff5f46;
+  font:
+    700 9px Arial,
+    sans-serif;
+  letter-spacing: 0.1em;
+}
+.benchmark-cursor {
+  stroke: #171717;
+  stroke-width: 1.5;
+}
+.benchmark-time {
+  fill: #777;
+  font:
+    10px Arial,
+    sans-serif;
+}
+.benchmark-focus:not(.hidden) {
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 22px;
+  box-shadow:
+    0 0 0 100vmax rgba(18, 20, 21, 0.58),
+    0 32px 100px rgba(0, 0, 0, 0.28);
+  display: grid;
+  gap: 20px;
+  left: 50%;
+  margin: 0;
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+  padding: 28px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(920px, calc(100vw - 32px));
+  z-index: 100;
+}
+.benchmark-focus-kicker,
+.benchmark-focus-heading,
+.benchmark-focus-actions {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.benchmark-focus-kicker {
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 14px;
+}
+.benchmark-focus-kicker span {
+  color: #ff5f46;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+.benchmark-focus-kicker i {
+  animation: benchmark-pulse 1.4s infinite;
+  background: #ff5f46;
+  border-radius: 50%;
+  display: inline-block;
+  height: 8px;
+  margin-right: 7px;
+  width: 8px;
+}
+.benchmark-focus-kicker small {
+  color: #7a7f83;
+}
+.benchmark-focus-heading p {
+  color: #ff5f46;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0 0 4px;
+}
+.benchmark-focus-heading h2 {
+  font-size: 34px;
+  letter-spacing: -0.04em;
+  margin: 0 0 4px;
+}
+.benchmark-focus-heading small {
+  color: #72777b;
+}
+.gpu-demo-countdown {
+  text-align: right;
+}
+.gpu-demo-countdown strong {
+  display: block;
+  font-size: 42px;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+.gpu-demo-countdown span {
+  color: #747a7e;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.benchmark-session-live {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.benchmark-session-live > span {
+  background: #f6f6f6;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  padding: 13px 16px;
+}
+.benchmark-session-live small {
+  color: #72777b;
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+.benchmark-session-live strong {
+  display: block;
+  font-size: 25px;
+  margin-top: 4px;
+}
+.session-chart {
+  background: #fafafa;
+  border: 1px solid #e7e7e7;
+  border-radius: 14px;
+  height: 210px;
+  padding: 8px;
+}
+.session-chart svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.benchmark-focus-actions {
+  border-top: 1px solid #e8e8e8;
+  padding-top: 16px;
+}
+.benchmark-focus-actions > span {
+  color: #676d71;
+  font-size: 12px;
+}
+.benchmark-focus .gpu-stop {
+  background: #fff;
+  border: 1px solid #df2535;
+  border-radius: 8px;
+  color: #c51627;
+  font-weight: 700;
+  padding: 11px 18px;
+}
+.benchmark-focus .gpu-demo-progress-track {
+  background: #eee;
+  border-radius: 999px;
+  height: 5px;
+  overflow: hidden;
+}
+.benchmark-focus .gpu-demo-progress-track i {
+  background: #ff5f46;
+  display: block;
+  height: 100%;
+  transition: width 0.25s linear;
+}
+.benchmark-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  padding: 16px 18px 4px;
+}
+.benchmark-summary-card {
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  padding: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.benchmark-summary-card:before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: #ff5f46;
+}
+.benchmark-summary-card.gpu:before {
+  background: #00b875;
+}
+.benchmark-summary-card.npu:before {
+  background: #8b5cf6;
+}
+.benchmark-summary-card.memory:before {
+  background: #5f7ea8;
+}
+.benchmark-summary-card span,
+.benchmark-summary-card small {
+  color: #73797e;
+  display: block;
+  font-size: 10px;
+}
+.benchmark-summary-card strong {
+  display: block;
+  font-size: 17px;
+  margin: 6px 0;
+}
+@keyframes benchmark-pulse {
+  50% {
+    box-shadow: 0 0 0 8px #ff5f4620;
+  }
+}
+@media (max-width: 620px) {
+  .benchmark-focus:not(.hidden) {
+    padding: 20px;
+  }
+  .benchmark-focus-heading {
+    align-items: flex-start;
+  }
+  .benchmark-focus-heading h2 {
+    font-size: 27px;
+  }
+  .benchmark-session-live,
+  .benchmark-summary {
+    grid-template-columns: 1fr;
+  }
+  .session-chart {
+    height: 170px;
+  }
+}
+.benchmark-focus.gpu-demo-progress:not(.hidden) {
+  grid-template-columns: 1fr;
+}
+.gpu-demo-card {
+  overflow: hidden;
+  padding-top: 0 !important;
+}
+.gpu-demo-visual {
+  align-items: center;
+  background: #f3f3f3;
+  border-bottom: 1px solid #e5e5e5;
+  color: #777;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 145px;
+  justify-content: center;
+  margin: 0 -14px 14px;
+  overflow: hidden;
+  position: relative;
+}
+.gpu-demo-visual span {
+  color: #454a47;
+  font-size: 12px;
+  font-weight: 600;
+}
+.gpu-demo-visual small {
+  color: #8a8e8c;
+  font-size: 10px;
+}
+.gpu-demo-skeleton .gpu-demo-visual,
+.gpu-demo-skeleton header span,
+.gpu-demo-skeleton header small,
+.gpu-demo-skeleton p,
+.gpu-demo-skeleton > i {
+  animation: skeleton-surface 1.4s ease-in-out infinite;
+  background: #e8e8e8;
+  border: 0;
+  border-radius: 4px;
+  display: block;
+}
+.gpu-demo-skeleton header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+.gpu-demo-skeleton header span {
+  height: 14px;
+  width: 42%;
+}
+.gpu-demo-skeleton header small {
+  height: 9px;
+  width: 26%;
+}
+.gpu-demo-skeleton p {
+  height: 11px;
+  margin: 13px 0 18px;
+  width: 72%;
+}
+.gpu-demo-skeleton > i {
+  height: 29px;
+  width: 98px;
+}
+@media (max-width: 900px) {
+  .gpu-demo-visual {
+    height: 180px;
+  }
+}

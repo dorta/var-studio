@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>BSP &amp; Software · VAR-Studio</title>
+    <link rel="icon" type="image/png" href="/variscite-favicon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <link rel="stylesheet" href="/brand.css" />
+    <link rel="stylesheet" href="/bsp.css" />
+  </head>
+  <body>
+    <div class="shell bsp-page">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="VAR-Studio dashboard"
+          ><img
+            class="brand-logo"
+            src="/variscite-logo-black.svg"
+            alt="Variscite"
+          /><span class="brand-product"
+            ><strong>Board Diagnostics</strong><small>VAR-STUDIO</small></span
+          ></a
+        >
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/">Dashboard</a><a href="/hardware.html">Hardware</a
+          ><a href="/bsp.html" aria-current="page">Board Support Package</a
+          ><a href="/lab.html">Lab</a><a href="/diagnostics.html">Diagnostics</a
+          ><a class="support-nav" href="/support.html">Support</a>
+        </nav>
+        <div class="status">
+          <span class="pulse"></span><span id="connection">Connecting</span
+          ><time id="clock">--:--:--</time>
+        </div>
+      </header>
+      <main>
+        <section class="bsp-heading">
+          <p class="eyebrow">SOFTWARE INVENTORY</p>
+          <h1>BSP &amp; Build</h1>
+          <p>
+            Yocto distribution, kernel and exact layer revisions used to build
+            this image.
+          </p>
+        </section>
+        <section class="panel bsp-panel">
+          <div class="panel-title">
+            <div>
+              <p>BUILD CONFIGURATION</p>
+              <h2 id="image-name">Active image</h2>
+              <small id="generated-at" class="panel-subtitle"
+                >Collecting build information…</small
+              >
+            </div>
+            <span id="modified-count" class="tag">—</span>
+          </div>
+          <div class="build-summary">
+            <div><span>Distro</span><strong id="bsp-distro">—</strong></div>
+            <div><span>Release</span><strong id="bsp-version">—</strong></div>
+            <div><span>Kernel</span><strong id="kernel">—</strong></div>
+            <div><span>Layers</span><strong id="layers-count">—</strong></div>
+          </div>
+          <div class="bsp-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Layer</th>
+                  <th>Revision</th>
+                  <th>Commit details</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="layers"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <span>© 2025-2026 Variscite Ltd.</span>
+        <span><a href="https://github.com/dorta/var-studio/blob/main/LICENSE"
+          >Apache License 2.0</a> · Local data · no external telemetry</span>
+      </footer>
+    </div>
+    <script src="/bsp.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2025-2026 Variscite Ltd.
+
+:release-url: https://github.com/dorta/var-studio/releases/latest
+:website-url: https://www.variscite.com/
+:developer-url: https://dev.variscite.com/
+
+[align=center]
+image::cmd/dashboard/web/variscite-logo-black.svg[Variscite, width=320]
+
+[.text-center]
+*Local board diagnostics for Variscite System on Modules*
+
+[.text-center]
+{release-url}[Latest release],
+{website-url}[www.variscite.com],
+{developer-url}[dev.variscite.com]
+
+
+== Install
+
+Run as `root` on a Variscite board with Docker, curl, and systemd:
+
+[source,sh]
+----
+curl -kfsSL https://github.com/dorta/var-studio/raw/main/install.sh | sh
+----
+
+
+== License
+
+link:LICENSE[Apache License 2.0], Copyright 2025-2026 Variscite Ltd.

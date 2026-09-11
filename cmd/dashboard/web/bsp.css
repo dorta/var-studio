@@ -1,0 +1,124 @@
+.bsp-heading {
+  padding: 44px 2px 24px;
+}
+.bsp-heading h1 {
+  margin: 0;
+  color: #1d1d1d;
+  font-size: 36px;
+  letter-spacing: -0.04em;
+}
+.bsp-heading > p:last-child {
+  margin: 11px 0 0;
+  color: #666;
+  font-size: 12px;
+}
+.bsp-panel {
+  padding: 28px;
+}
+.bsp-table {
+  margin-top: 20px;
+}
+.bsp-table table {
+  table-layout: fixed;
+}
+.bsp-table th:nth-child(1) {
+  width: 22%;
+}
+.bsp-table th:nth-child(2) {
+  width: 29%;
+}
+.bsp-table th:nth-child(3) {
+  width: 41%;
+}
+.bsp-table th:nth-child(4) {
+  width: 8%;
+}
+.bsp-table td {
+  padding: 12px 10px;
+  vertical-align: middle;
+}
+.bsp-table td:nth-child(2) {
+  overflow-wrap: anywhere;
+}
+.commit-cell {
+  color: #4d5350;
+}
+.commit-details {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.75fr) minmax(180px, 1.15fr) minmax(
+      145px,
+      0.8fr
+    );
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.commit-details strong,
+.commit-details a,
+.commit-details time {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.commit-details strong {
+  color: #1d1d1d;
+  font-size: 10px;
+}
+.commit-details a {
+  color: #5f7ea8;
+  font-size: 9px;
+  text-decoration: none;
+}
+.commit-details a:hover {
+  color: #ff5f46;
+  text-decoration: underline;
+}
+.commit-details time {
+  color: #666;
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+}
+.metadata-unavailable {
+  display: inline-flex;
+  padding: 5px 7px;
+  border: 1px solid #e2e2e2;
+  border-radius: 5px;
+  color: #858985;
+  background: #f3f3f3;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.metadata-loading {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 7px;
+  border: 2px solid #ffd8d1;
+  border-top-color: #ff5f46;
+  border-radius: 50%;
+  animation: metadata-spin 0.8s linear infinite;
+  vertical-align: middle;
+}
+.commit-cell > small {
+  color: #8a8d8b;
+  font-size: 8px;
+}
+@keyframes metadata-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 1000px) {
+  .bsp-table {
+    overflow-x: auto;
+  }
+  .bsp-table table {
+    min-width: 1080px;
+  }
+}
+@media (max-width: 700px) {
+  .bsp-panel {
+    padding: 18px;
+  }
+}

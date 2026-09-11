@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Lab · VAR-Studio</title>
+    <link rel="icon" type="image/png" href="/variscite-favicon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <link rel="stylesheet" href="/brand.css" />
+    <link rel="stylesheet" href="/lab.css" />
+  </head>
+  <body>
+    <div id="lab-shell" class="shell lab-page">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="VAR-Studio dashboard">
+          <img
+            class="brand-logo"
+            src="/variscite-logo-black.svg"
+            alt="Variscite"
+          />
+          <span class="brand-product"
+            ><strong>Board Diagnostics</strong><small>VAR-STUDIO</small></span
+          >
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/">Dashboard</a>
+          <a href="/hardware.html">Hardware</a>
+          <a href="/bsp.html">Board Support Package</a>
+          <a href="/lab.html" aria-current="page">Lab</a>
+          <a href="/diagnostics.html">Diagnostics</a>
+          <a class="support-nav" href="/support.html">Support</a>
+        </nav>
+        <div class="status">
+          <span class="pulse"></span><span id="connection">Connecting</span
+          ><time id="clock">--:--:--</time>
+        </div>
+      </header>
+
+      <section class="lab-switcher" aria-labelledby="lab-switcher-title">
+        <div class="lab-switcher-inner">
+          <div class="lab-switcher-copy">
+            <p class="eyebrow">HARDWARE LAB</p>
+            <div>
+              <h1 id="lab-switcher-title">Choose a workspace</h1>
+              <p>
+                Explore board capabilities, run demos, and validate
+                hardware from one place.
+              </p>
+            </div>
+          </div>
+          <nav class="lab-workspaces" aria-label="Lab workspaces">
+            <a
+              href="/lab.html?view=performance"
+              data-lab-view="performance"
+            >
+              <span class="lab-workspace-icon">PERF</span>
+              <span class="lab-workspace-copy">
+                <strong>Performance</strong>
+                <small>Metrics and controlled benchmarks</small>
+              </span>
+              <span class="lab-workspace-arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="/lab.html?view=camera" data-lab-view="camera">
+              <span class="lab-workspace-icon">CAM</span>
+              <span class="lab-workspace-copy">
+                <strong>Camera</strong>
+                <small>Devices, formats, and live preview</small>
+              </span>
+              <span class="lab-workspace-arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="/lab.html?view=demos" data-lab-view="demos">
+              <span class="lab-workspace-icon">DEMO</span>
+              <span class="lab-workspace-copy">
+                <strong>Demos</strong>
+                <small>Capability-aware experiences</small>
+              </span>
+              <span class="lab-workspace-arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="/lab.html?view=guides" data-lab-view="guides">
+              <span class="lab-workspace-icon">TEST</span>
+              <span class="lab-workspace-copy">
+                <strong>Test Guides</strong>
+                <small>Step-by-step hardware validation</small>
+              </span>
+              <span class="lab-workspace-arrow" aria-hidden="true">→</span>
+            </a>
+          </nav>
+        </div>
+      </section>
+
+      <main id="lab-content" aria-live="polite">
+        <section class="lab-loading">
+          <span class="lab-loading-mark"></span>
+          <div>
+            <strong>Opening Lab</strong>
+            <p>Loading the selected workspace…</p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="lab-footer">
+        <span>© 2025-2026 Variscite Ltd.</span>
+        <span><a href="https://github.com/dorta/var-studio/blob/main/LICENSE"
+          >Apache License 2.0</a> · Local data · no external telemetry</span>
+      </footer>
+    </div>
+    <script src="/lab.js" type="module"></script>
+  </body>
+</html>

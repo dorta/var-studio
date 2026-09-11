@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Support & Diagnostics · VAR-Studio</title>
+    <link rel="icon" type="image/png" href="/variscite-favicon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <link rel="stylesheet" href="/brand.css" />
+    <link rel="stylesheet" href="/support.css" />
+  </head>
+  <body>
+    <div class="shell support-page">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="VAR-Studio dashboard">
+          <img
+            class="brand-logo"
+            src="/variscite-logo-black.svg"
+            alt="Variscite"
+          />
+          <span class="brand-product"
+            ><strong>Board Diagnostics</strong><small>VAR-STUDIO</small></span
+          >
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/">Dashboard</a>
+          <a href="/hardware.html">Hardware</a>
+          <a href="/bsp.html">Board Support Package</a>
+          <a href="/lab.html">Lab</a><a href="/diagnostics.html">Diagnostics</a>
+          <a class="support-nav" href="/support.html" aria-current="page"
+            >Support</a
+          >
+        </nav>
+        <div class="status">
+          <span class="pulse"></span><span id="connection">Connecting</span
+          ><time id="clock">--:--:--</time>
+        </div>
+      </header>
+
+      <div class="support-toolbar">
+        <div>
+          <p class="eyebrow">SUPPORT &amp; DIAGNOSTICS</p>
+          <h1>Support Report</h1>
+          <p>
+            Review the redacted diagnostic data before sharing it with Variscite
+            support.
+          </p>
+        </div>
+        <div class="support-actions">
+          <button id="refresh" type="button">Refresh</button
+          ><a href="/api/v1/support-report" download>Download ZIP ↓</a>
+        </div>
+      </div>
+
+      <main class="support-explorer">
+        <aside class="support-sidebar">
+          <p>REPORT CONTENTS</p>
+          <nav aria-label="Support report sections">
+            <button class="active" data-section="summary">
+              <span>SUM</span>Summary
+            </button>
+            <button data-section="inventory"><span>INV</span>Inventory</button>
+            <button data-section="metrics">
+              <span>MET</span>Metrics history
+            </button>
+            <button data-section="kernel">
+              <span>KRN</span>Kernel live <i>LIVE</i>
+            </button>
+            <button data-section="files">
+              <span>TXT</span>Diagnostic files
+            </button>
+            <button data-section="privacy"><span>SEC</span>Privacy</button>
+          </nav>
+        </aside>
+        <section class="support-content">
+          <header class="support-content-header">
+            <div>
+              <p id="section-kicker">REPORT OVERVIEW</p>
+              <h2 id="section-title">Summary</h2>
+            </div>
+            <time id="updated-at">—</time>
+          </header>
+          <div id="support-body" class="support-body">
+            <div class="support-loading">Collecting diagnostics…</div>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <span>© 2025-2026 Variscite Ltd.</span>
+        <span><a href="https://github.com/dorta/var-studio/blob/main/LICENSE"
+          >Apache License 2.0</a> · Local data · no external telemetry</span>
+      </footer>
+    </div>
+    <script src="/support.js" defer></script>
+  </body>
+</html>

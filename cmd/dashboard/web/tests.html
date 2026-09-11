@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      if (window.top === window.self)
+        window.location.replace("/lab.html?view=guides");
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Test Guides · VAR-Studio</title>
+    <link rel="icon" type="image/png" href="/variscite-favicon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <link rel="stylesheet" href="/brand.css" />
+    <link rel="stylesheet" href="/tests.css" />
+  </head>
+  <body>
+    <div class="shell tests-page">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="VAR-Studio dashboard"
+          ><img
+            class="brand-logo"
+            src="/variscite-logo-black.svg"
+            alt="Variscite"
+          /><span class="brand-product"
+            ><strong>Board Diagnostics</strong><small>VAR-STUDIO</small></span
+          ></a
+        >
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/">Dashboard</a><a href="/hardware.html">Hardware</a
+          ><a href="/bsp.html">Board Support Package</a
+          ><a href="/lab.html">Lab</a><a href="/diagnostics.html">Diagnostics</a
+          ><a class="support-nav" href="/support.html">Support</a>
+        </nav>
+        <div class="status">
+          <span class="pulse"></span><span id="connection">Connecting</span
+          ><time id="clock">--:--:--</time>
+        </div>
+      </header>
+      <main>
+        <section class="tests-hero">
+          <div>
+            <p class="eyebrow">BOARD VALIDATION LIBRARY</p>
+            <h1>Test Guides</h1>
+            <p>
+              Learn how to validate board interfaces with curated procedures
+              derived from Variscite release validation practices.
+            </p>
+          </div>
+          <div class="tests-summary">
+            <span><strong id="ready-count">—</strong>Ready now</span
+            ><span><strong id="guide-count">—</strong>Total guides</span>
+          </div>
+        </section>
+        <section class="safety-banner">
+          <span>SAFE BY DESIGN</span>
+          <div>
+            <strong>Guidance first, deliberate execution.</strong>
+            <p>
+              Commands are copied to your terminal; VAR-Studio never accepts
+              arbitrary shell commands. Tests that change state or need external
+              wiring are clearly marked.
+            </p>
+          </div>
+        </section>
+        <section class="guide-toolbar">
+          <label class="guide-search"
+            ><span>⌕</span
+            ><input
+              id="guide-search"
+              type="search"
+              placeholder="Search camera, CAN, thermal, RTC…"
+              autocomplete="off"
+          /></label>
+          <div id="readiness-filters" class="guide-filters">
+            <button class="active" data-filter="all">All</button
+            ><button data-filter="ready">Ready</button
+            ><button data-filter="setup">Needs setup</button>
+          </div>
+          <select id="category-filter" aria-label="Filter category">
+            <option value="all">All categories</option>
+          </select>
+        </section>
+        <section class="guide-workspace">
+          <aside>
+            <div id="guide-list" class="test-guide-list">
+              <p class="guide-loading">Detecting board capabilities…</p>
+            </div>
+          </aside>
+          <article id="guide-detail" class="test-guide-detail">
+            <div class="guide-empty">
+              <span>TEST</span>
+              <h2>Select a test guide</h2>
+              <p>
+                Choose a validation procedure to see prerequisites, commands,
+                expected evidence, and safety notes.
+              </p>
+            </div>
+          </article>
+        </section>
+        <section class="validation-model">
+          <div>
+            <p class="eyebrow">FOR RELEASE ENGINEERING</p>
+            <h2>From guided checks to automated release tests</h2>
+            <p>
+              Each guide has a stable test identity, capability predicate,
+              prerequisites, expected evidence, timeout, and cleanup policy.
+              This is the same model needed for a future allowlisted test
+              runner—without exposing a general-purpose shell.
+            </p>
+          </div>
+          <a href="/diagnostics.html">Open Diagnostics Lab →</a>
+        </section>
+      </main>
+      <footer>
+        <span>© 2025-2026 Variscite Ltd.</span>
+        <span><a href="https://github.com/dorta/var-studio/blob/main/LICENSE"
+          >Apache License 2.0</a> · Local data · no external telemetry</span>
+      </footer>
+    </div>
+    <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">
+      Command copied
+    </div>
+    <script src="/tests.js" defer></script>
+  </body>
+</html>

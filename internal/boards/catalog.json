@@ -1,0 +1,677 @@
+[
+  {
+    "name": "DART-4460",
+    "soc": "TI OMAP4460",
+    "description": "The DART-4460 is Based on TI’s OMAP4460, 1.5GHz Dual-Core Cortex-A9. The fastest ARM System on Module on the market today. The DART-4460, offers an ideal solution for a wide range of applications which require rich multimedia functionality as well as high-processing power. This compact, cost effective and low consumption SoM offers a performance level of an Intel Atom.",
+    "documentation_url": "https://variscite.com/system-on-module-som/ti-omap4460/dart-4460/#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/ti-omap4460/dart-4460/#evaluation-kit",
+    "specifications_url": "https://variscite.com/system-on-module-som/ti-omap4460/dart-4460/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2017/12/DARTBOARD_Quick_Start_Guide_V10.pdf",
+    "machines": [
+      "omap4-var-dart",
+      "omap4_var_dart"
+    ],
+    "dtbs": [],
+    "carriers": [
+      "DART-BOARD"
+    ],
+    "image_url": "/boards/DART-4460.png"
+  },
+  {
+    "name": "DART-6UL",
+    "soc": "i.MX 6UL/6ULL/6ULZ",
+    "description": "Supporting the i.MX 6UL/6ULL/6ULZ, the DART-6UL allows designers to use a single System on Module in a broad range of applications to achieve short time-to-market for their current innovations, while still accommodating potential R&D directions and marketing opportunities. This versatile solution’s -40 to 85 °C temperature range and Dual CAN support is ideal for industrial applications.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-6/i-mx-6ul/dart-6ul/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/dart-6ul-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-6/i-mx-6ul/dart-6ul/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2017/12/DART-6UL-quick-start-guide.pdf",
+    "machines": [
+      "imx6ul-var-dart",
+      "imx6ul_var_dart"
+    ],
+    "dtbs": [
+      "imx6ulz-var-dart-6ulcustomboard-emmc-sd-card.dtb",
+      "imx6ulz-var-dart-6ulcustomboard-emmc-wifi-iw61x.dtb"
+    ],
+    "carriers": [
+      "VAR-6ULCustomBoard"
+    ],
+    "image_url": "/boards/DART-6UL.png"
+  },
+  {
+    "name": "DART-MX6",
+    "soc": "i.MX 6",
+    "description": "Supporting the i.MX 6 Quad, Dual, the DART-MX6 allows designers to use a single System on Module in a broad range of applications to achieve short time-to-market for their current innovations, while still accommodating potential R&D directions and marketing opportunities. This versatile solution’s -40 to 85 °C temperature range and Dual CAN support is ideal for industrial applications, while 1080p video and graphics accelerations make it equally suitable for intensive multimedia applications.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-6/dart-mx6/#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/i-mx-6/dart-mx6/#evaluation-kit",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-6/dart-mx6/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2017/11/DART-MX6-quick-start-guide.pdf",
+    "machines": [
+      "var-som-mx6",
+      "var_som_mx6"
+    ],
+    "dtbs": [
+      " ",
+      "imx6q-var-dart.dtb"
+    ],
+    "carriers": [
+      " ",
+      "VAR-DT6CustomBoard"
+    ],
+    "image_url": "/boards/DART-MX6.png"
+  },
+  {
+    "name": "DART-MX8M",
+    "soc": "i.MX 8M",
+    "description": "Supporting the i.MX8M Quad/QuadLite/Dual, the DART-MX8M allows designers to use a single System on Module in a broad range of applications to achieve short time-to-market for their current innovations, while still accommodating potential R&D directions and marketing opportunities. This versatile solution’s -40 to 85 °C temperature range is ideal for industrial applications, while 4K video and graphics accelerations make it equally suitable for intensive multimedia applications.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m/dart-mx8m/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/dart-mx8m-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m/dart-mx8m/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2018/04/DART-MX8M-quick-start-guide.pdf",
+    "machines": [
+      "imx8mq-var-dart",
+      "imx8mq_var_dart"
+    ],
+    "dtbs": [
+      "imx8mq-var-dart-dt8mcustomboard-m4-sd-lvds.dtb",
+      "imx8mq-var-dart-dt8mcustomboard.dtb"
+    ],
+    "carriers": [
+      "VAR-DT8MCustomBoard"
+    ],
+    "image_url": "/boards/DART-MX8M.png"
+  },
+  {
+    "name": "DART-MX8M-MINI",
+    "soc": "i.MX 8M Mini",
+    "description": "Supporting the i.MX 8M Mini, the DART-MX8M-MINI is a pin2pin scalable option to the DART-MX8M, with lower power consumption and higher CPU performance, providing our customers with ultimate flexibility. The DART-MX8M-MINI offers an integrated 1080p video encode and decode acceleration support, 2D and 3D graphics, HQ audio and a wide range of connectivity options such as certified Wi-Fi/BT, Ethernet and USB.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-mini/dart-mx8m-mini/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/dart-mx8m-mini-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-mini/dart-mx8m-mini/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2019/02/DART-MX8M-MINI-quick-start-guide.pdf",
+    "machines": [
+      "imx8mm-var-dart",
+      "imx8mm_var_dart"
+    ],
+    "dtbs": [
+      "imx8mm-var-dart-dt8mcustomboard-m4.dtb",
+      "imx8mm-var-dart-dt8mcustomboard.dtb",
+      "imx8mm-var-dart-sonata.dtb"
+    ],
+    "carriers": [
+      "DT8MCustomBoard",
+      "Sonata-Board"
+    ],
+    "image_url": "/boards/DART-MX8M-MINI.png"
+  },
+  {
+    "name": "DART-MX8M-PLUS",
+    "soc": "i.MX 8M Plus",
+    "description": "Powered by the i.MX 8M Plus, the DART-MX8M-PLUS presents the first generation of System on Modules with dedicated Artificial Intelligence (AI) / Machine Learning (ML) capabilities. The SoM includes advanced multimedia capabilities such as H.265/H.264 Full HD video encode and decode engines, advanced 2D/3D graphic acceleration, HDMI, LVDS, MIPI-DSI display, 2x CAN-FD and dual cameras inputs. The SoM also includes various interfaces and connectivity options: certified dual-band Wi-Fi 802.11a/b/g/n/ac, BT/BLE, dual GbE, dual USB3, PCIe, SPI and UART.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-plus/dart-mx8m-plus/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/dart-mx8m-plus-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-plus/dart-mx8m-plus/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2020/10/DART-MX8M-PLUS-quick-start-guide.pdf",
+    "machines": [
+      "imx8mp-var-dart",
+      "imx8mp_var_dart"
+    ],
+    "dtbs": [
+      "imx8mp-var-dart-dt8mcustomboard-m7.dtb",
+      "imx8mp-var-dart-dt8mcustomboard.dtb",
+      "imx8mp-var-dart-sonata.dtb"
+    ],
+    "carriers": [
+      "DT8MCustomBoard",
+      "Sonata"
+    ],
+    "image_url": "/boards/DART-MX8M-PLUS.png"
+  },
+  {
+    "name": "DART-MX91",
+    "soc": "i.MX 91",
+    "description": "The DART-MX91, powered by a 1.4GHz Cortex®-A55 NXP i.MX 91 processor, combines energy-efficient architecture, robust security features, and cost-effectiveness, making it ideal for embedded applications across diverse industries. This System on Module (SoM) provides a wide range of connectivity options, including dual CAN-FD, dual Gigabit Ethernet, certified Wi-Fi 6 (802.11ax/ac/a/b/g/n), Bluetooth/BLE 5.4, and 802.15.4, with support for industrial temperature ranges. As a member of the DART Pin2Pin family, the DART-MX91 enables maximum scalability, extended product availability, and streamlined development, reducing both time and costs. The DART-MX91 allows for seamless transitions across platforms, from i.MX8M Mini, i.MX8M, and i.MX8M Plus, up to i.MX 91, i.MX 93 and i.MX 95.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-91/dart-mx91/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/dart-mx91-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-91/dart-mx91/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2025/03/DART-MX91-Quick-Start-Guide.pdf",
+    "machines": [
+      "imx91-var-som",
+      "imx91_var_som"
+    ],
+    "dtbs": [
+      "imx91-var-dart-dt8mcustomboard.dtb",
+      "imx91-var-dart-sonata.dtb"
+    ],
+    "carriers": [
+      "DT8MCustomBoard",
+      "Sonata-Board"
+    ],
+    "image_url": "/boards/DART-MX91.png"
+  },
+  {
+    "name": "DART-MX93",
+    "soc": "i.MX 93",
+    "description": "The DART-MX93 is based on the NXP i.MX93 processor, featuring up to a 1.7GHz Dual Cortex-A55 processor, along with a 250MHz Cortex-M33 real-time co-processor. The SoM combines machine learning (AI/ML) capabilities with an Energy Flex architecture for power-efficient processing and a wide range of connectivity features, including: 2× CAN bus, 2× GbE, audio in/out, ADC, 2× USB, certified Wi-Fi 6 dual-band 802.11ax/ac/a/b/g/n with BT/BLE 5.4 and optional 802.15.4, LVDS display outputs, camera inputs, and industrial temperature grade.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-93/dart-mx93/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/dart-mx93-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-93/dart-mx93/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2024/05/DART-MX93-quick-start-guide.pdf",
+    "machines": [
+      "imx93-var-som",
+      "imx93_var_som"
+    ],
+    "dtbs": [
+      "imx93-var-dart-dt8mcustomboard.dtb",
+      "imx93-var-dart-sonata.dtb"
+    ],
+    "carriers": [
+      "Sonata-Board",
+      "VAR-DT8MCustomBoard"
+    ],
+    "image_url": "/boards/DART-MX93.png"
+  },
+  {
+    "name": "DART-MX95",
+    "soc": "i.MX 95",
+    "description": "The DART-MX95 is powered by the NXP i.MX95, featuring up to 6 Arm Cortex®-A55 cores running at 2.0GHz, along with two independent real-time co-processors: an 800MHz Arm Cortex-M7 and a 250MHz Arm Cortex-M33. This System on Module (SoM) offers a blend of high performance, advanced graphics, AI/ML capabilities, and various connectivity options. These include certified dual-band Wi-Fi 6 802.11 ax/ac/a/b/g/n, Bluetooth/BLE 5.4 and optional 802.15.4, dual GbE + 10GbE, an integrated NPU, a robust 2D/3D GPU, 4K encode/decode, support for 4K displays, dual camera, dual PCIe Gen 3.0, USB 3.0, CAN FD and industrial-grade temperature support.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-95/dart-mx95/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/dart-mx95-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-95/dart-mx95/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2024/05/DART-MX95-quick-start-guide.pdf",
+    "machines": [
+      "imx95-var-dart",
+      "imx95_var_dart"
+    ],
+    "dtbs": [
+      "imx95-var-dart-dt8mcustomboard.dtb",
+      "imx95-var-dart-sonata.dtb"
+    ],
+    "carriers": [
+      "Sonata-Board",
+      "VAR-DT8MCustomBoard"
+    ],
+    "image_url": "/boards/DART-MX95.png"
+  },
+  {
+    "name": "DART-SD410",
+    "soc": "Qualcomm Snapdragon™ 410",
+    "description": "Bringing the Snapdragon™ magic to the embedded market, the DART-SD410 supports the Qualcomm Snapdragon™ 410 (APQ8016) 1.2GHz Quad Cortex-A53 in 64-bit architecture. In an amazing 25mm x 43mm ultra compact size, the DART-SD410 offers a staggering processing power and highly optimized power consumption, ideal for embedded portable devices and battery operated products. High-resolution camera, advanced multimedia support and broad connectivity options are just some of the features that ensure a richer experience in various embedded segments and applications.",
+    "documentation_url": "https://variscite.com/system-on-module-som/qualcomm-snapdragon-410/dart-sd410/#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/qualcomm-snapdragon-410/dart-sd410/#evaluation-kit",
+    "specifications_url": "https://variscite.com/system-on-module-som/qualcomm-snapdragon-410/dart-sd410/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2018/02/DART-SD410-quick-start-guide.pdf",
+    "machines": [
+      "sd410-var-dart",
+      "sd410_var_dart"
+    ],
+    "dtbs": [],
+    "carriers": [
+      "VAR-SD410CustomBoard"
+    ],
+    "image_url": "/boards/DART-SD410.png"
+  },
+  {
+    "name": "SPEAR-MX8",
+    "soc": "i.MX 8 QuadMax/QuadPlus",
+    "description": "Supporting NXP's i.MX 8QuadMax, the SPEAR-MX8 allows designers to use a single System on Module in a broad range of applications to achieve short time-to-market for their current innovations, while still accommodating potential R&D directions and marketing opportunities. This highly scalable SoM is an ideal solution for embedded products requiring advanced performance processing, high-end graphics, Ultra HD video capabilities and a variety of high-speed interfaces and connectivity options, such as USB3, CAN FD, and many more.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8-quadmax-quadplus/spear-mx8/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/spear-mx8-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8-quadmax-quadplus/spear-mx8/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2019/10/SPEAR-MX8-quick-start-guide.pdf",
+    "machines": [
+      "imx8qm-var-som",
+      "imx8qm_var_som"
+    ],
+    "dtbs": [
+      "imx8qm-var-spear-sp8customboard-lvds.dtb",
+      "imx8qm-var-spear-sp8customboard.dtb"
+    ],
+    "carriers": [
+      "VAR-SP8CustomBoard"
+    ],
+    "image_url": "/boards/SPEAR-MX8.png"
+  },
+  {
+    "name": "VAR-SMARC-MX8M-PLUS",
+    "soc": "i.MX 8M Plus",
+    "description": "Powered by NXP's i.MX 8M Plus, the VAR-SMARC-MX8M-PLUS features a 1.8GHz Quad Cortex-A53 with 800MHz Cortex-M7 real-time co-processor, delivering integrated Artificial Intelligence (AI) / Machine Learning (ML) capabilities and an advanced Image Signal Processor (ISP). The SoM includes H.265/H.264 Full HD video encode and decode engines, advanced 2D/3D graphic acceleration, HDMI, LVDS, MIPI-DSI display support, 2x CAN-FD and dual camera inputs. Extended connectivity options include multiple USB3.0, dual Gigabit Ethernet with IEEE1588, certified dual-band Wi-Fi 802.11a/b/g/n/ac, Bluetooth/BLE, PCIe, SPI and UART.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-plus/var-smarc-mx8m-plus/#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-plus/var-smarc-mx8m-plus/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-plus/var-smarc-mx8m-plus/#highlights",
+    "quick_start_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-plus/var-smarc-mx8m-plus/",
+    "machines": [
+      "imx8mp-var-dart",
+      "imx8mp_var_dart"
+    ],
+    "dtbs": [
+      "imx8mp-var-smarc-echo.dtb"
+    ],
+    "carriers": [
+      "EchoCustomBoard"
+    ],
+    "image_url": "/boards/VAR-SMARC-MX8M-PLUS.png"
+  },
+  {
+    "name": "VAR-SMARC-MX95",
+    "soc": "i.MX 95",
+    "description": "Powered by the NXP i.MX 95, the VAR-SMARC-MX95 is a SMARC-compliant SoM featuring up to 6 Arm Cortex-A55 cores at 2.0GHz, alongside a 333MHz Arm Cortex-M33 and an 800MHz Arm Cortex-M7 for dedicated real-time processing. The module supports premium graphics rendering, hardware security, functional safety, built-in NPU with 2 TOPS AI/ML capabilities, and a broad range of wired and wireless interfaces. These include certified dual-band Wi-Fi 6 802.11ax/ac/a/b/g/n, Bluetooth/BLE 5.4 with optional 802.15.4, dual Gigabit Ethernet with TSN, robust 2D/3D GPU, 4K video encoding and decoding, 4K display output, dual MIPI CSI-2 camera, PCIe Gen 3.0 x2, and USB 3.0.<br><br>The VAR-SMARC-MX95 is in development. Specifications may be revised without advance notice.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-95/var-smarc-mx95/#documentation",
+    "shop_url": "",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-95/var-smarc-mx95/#highlights",
+    "quick_start_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-95/var-smarc-mx95/",
+    "machines": [
+      "imx95-var-dart",
+      "imx95_var_dart"
+    ],
+    "dtbs": [
+      "imx95-var-smarc-echo.dtb"
+    ],
+    "carriers": [
+      "Echo-Board"
+    ],
+    "image_url": "/boards/VAR-SMARC-MX95.png"
+  },
+  {
+    "name": "VAR-SOM-6UL",
+    "soc": "i.MX 6UL/6ULL/6ULZ",
+    "description": "Supporting the i.MX 6UL/6ULL/6ULZ, the VAR-SOM-6UL is pin-compatible with Variscite's i.MX 6, i.MX 8 and i.MX 8X platforms, offering Variscite’s customers a high level of scalability, extended lifetime availability and reduced development time, cost and risk. This versatile solution’s -40 to 85 °C temperature range and Dual CAN support is ideal for industrial applications.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-6/i-mx-6ul/var-som-6ul/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-6ul-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-6/i-mx-6ul/var-som-6ul/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2019/05/VAR-SOM-6UL-quick-start-guide.pdf",
+    "machines": [
+      "imx6ul-var-dart",
+      "imx6ul_var_dart"
+    ],
+    "dtbs": [
+      "imx6ulz-var-som-concerto-board-emmc-sd-card.dtb",
+      "imx6ulz-var-som-symphony-board-emmc-sd-card.dtb"
+    ],
+    "carriers": [
+      "Concerto-Board",
+      "Symphony-Board"
+    ],
+    "image_url": "/boards/VAR-SOM-6UL.png"
+  },
+  {
+    "name": "VAR-SOM-AM33",
+    "soc": "TI AM335x",
+    "description": "The VAR-SOM-AM33 is a low-power, low cost and high performance System-On-Module which serves as a building block and easily integrates into any embedded solution. It includes an extensive range of interfaces and communication protocols and is ready to run any embedded operating system such as Linux and Windows Embedded CE.",
+    "documentation_url": "https://variscite.com/system-on-module-som/ti-am335x/var-som-am33/#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/ti-am335x/var-som-am33/#evaluation-kit",
+    "specifications_url": "https://variscite.com/system-on-module-som/ti-am335x/var-som-am33/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2017/12/VAR-SOM-AM33-quick-start-guide.pdf",
+    "machines": [
+      "var-som-amx3",
+      "var_som_amx3"
+    ],
+    "dtbs": [],
+    "carriers": [
+      "VAR-AM33CustomBoard"
+    ],
+    "image_url": "/boards/VAR-SOM-AM33.png"
+  },
+  {
+    "name": "VAR-SOM-AM35",
+    "soc": "TI OMAP3530 / OMAP3503",
+    "description": "The VAR-SOM-AM35 is a low-power, high performance System-on-module which serves as a building block and easily integrates into any embedded solution. It includes an extensive range of interfaces and communication protocols and is ready to run any embedded operating system such as Linux and Windows Embedded CE.",
+    "documentation_url": "https://variscite.com/system-on-module-som/ti-am3517-am3505/var-som-am35/#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/ti-am3517-am3505/var-som-am35/#evaluation-kit",
+    "specifications_url": "https://variscite.com/system-on-module-som/ti-am3517-am3505/var-som-am35/#highlights",
+    "quick_start_url": "",
+    "machines": [],
+    "dtbs": [],
+    "carriers": [
+      "VAR-AM35CustomBoard"
+    ],
+    "image_url": "/boards/VAR-SOM-AM35.png"
+  },
+  {
+    "name": "VAR-SOM-AM43",
+    "soc": "TI AM437x",
+    "description": "The VAR-SOM-AM43 is a low-power, low cost and high performance System-On-Module which serves as a building block and easily integrates into any embedded solution. It includes an extensive range of interfaces and communication protocols and is ready to run any embedded operating system such as Linux and Windows Embedded CE.",
+    "documentation_url": "https://variscite.com/system-on-module-som/ti-am437x/var-som-am43//#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/ti-am437x/var-som-am43/#evaluation-kit",
+    "specifications_url": "https://variscite.com/system-on-module-som/ti-am437x/var-som-am43/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2017/12/VAR_SOM_AM43-quick-start-guide.pdf",
+    "machines": [
+      "var-som-amx3",
+      "var_som_amx3"
+    ],
+    "dtbs": [],
+    "carriers": [
+      "VAR-AM43CustomBoard"
+    ],
+    "image_url": "/boards/VAR-SOM-AM43.png"
+  },
+  {
+    "name": "VAR-SOM-AM62",
+    "soc": "TI Sitara™ AM62x",
+    "description": "At the heart of the VAR-SOM-AM62 is a TI AM62x SoC with a 1.4 GHz Quad Cortex®-A53 CPU, and 400 MHz Cortex-M4F and 333 MHz PRU real-time co-processors. The SoM combines a scalable CPU, energy-efficient architecture and advanced graphic capabilities. The SoM offers an ideal solution for industrial embedded products due to rich connectivity features such as certified single or dual-band Wi-Fi, BT/BLE 5.2, 3× CAN bus, dual GbE, audio, camera in and dual USB. The VAR-SOM-AM62 supports industrial operating temperatures, an integrated GPU and dual LVDS display interface.",
+    "documentation_url": "https://variscite.com/system-on-module-som/ti-sitara-am62x/var-som-am62/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-am62-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/ti-sitara-am62x/var-som-am62/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2023/01/VAR-SOM-AM62-quick-start-guide.pdf",
+    "machines": [
+      "am62x-var-som",
+      "am62x_var_som"
+    ],
+    "dtbs": [
+      " ",
+      "k3-am625-var-som-symphony.dtb"
+    ],
+    "carriers": [
+      " ",
+      "Symphony-Board"
+    ],
+    "image_url": "/boards/VAR-SOM-AM62.png"
+  },
+  {
+    "name": "VAR-SOM-AM62P",
+    "soc": "TI Sitara™ AM62Px",
+    "description": "At the heart of the VAR-SOM-AM62P is a TI Sitara™ AM62Px SoC with a 1.4 GHz Quad Cortex®-A53 CPU and 800MHz Cortex-R5F real-time co-processor. The SoM combines powerful multimedia processing, video acceleration capabilities, and advanced 3D graphics with OpenGL ES 3.2 and Vulkan 1.2 support. The SoM delivers an ideal solution for industrial embedded products requiring video encoding/decoding (H.264/H.265), through its rich connectivity features including certified Wi-Fi 6, Bluetooth/BLE 5.4, 4× CAN-FD, dual GbE, audio, camera input via MIPI-CSI2, and dual USB. The VAR-SOM-AM62P supports full industrial operating temperatures (-40 to 85°C), up to 8GB LPDDR4 memory, and multiple display options including MIPI-DSI and dual LVDS.",
+    "documentation_url": "https://variscite.com/system-on-module-som/ti-sitara-am62/ti-sitara-am62px/var-som-am62p/#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/ti-sitara-am62/ti-sitara-am62px/var-som-am62p/#evaluation-kit",
+    "specifications_url": "https://variscite.com/system-on-module-som/ti-sitara-am62/ti-sitara-am62px/var-som-am62p/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2025/09/VAR-SOM-AM62P-Quick-Start-Guide.pdf",
+    "machines": [
+      "am62px-var-som",
+      "am62px_var_som"
+    ],
+    "dtbs": [
+      " ",
+      "k3-am62p5-var-som-symphony.dtb"
+    ],
+    "carriers": [
+      " ",
+      "Symphony-Board"
+    ],
+    "image_url": "/boards/VAR-SOM-AM62P.png"
+  },
+  {
+    "name": "VAR-SOM-MX25",
+    "soc": "i.MX 25",
+    "description": "The VAR-SOM-MX25 is a cost optimized, highly integrated, low-power System-On-Module which serves as a building block and easily integrates into any embedded solution. It includes all vital peripherals / interfaces and is ready to run any embedded operating system such as Linux, Windows Embedded CE Embedded CE.",
+    "documentation_url": "https://variscite.com/system-on-module-som/freescale-i-mx25/var-som-mx25/#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/freescale-i-mx25/var-som-mx25/#evaluation-kit",
+    "specifications_url": "https://variscite.com/system-on-module-som/freescale-i-mx25/var-som-mx25/#highlights",
+    "quick_start_url": "",
+    "machines": [],
+    "dtbs": [],
+    "carriers": [],
+    "image_url": "/boards/VAR-SOM-MX25.png"
+  },
+  {
+    "name": "VAR-SOM-MX6",
+    "soc": "i.MX 6",
+    "description": "Supporting the i.MX 6 QuadPlus/Quad/Dual/DualLite/Solo SOC, the VAR-SOM-MX6 allows designers to use a single System on Module in a broad range of applications to achieve short time-to-market for their current innovations, while still accommodating potential R&D directions and marketing opportunities. This versatile solution’s -40 to 85 °C temperature range and Dual CAN support is ideal for industrial applications, while 1080p video and graphics accelerations make it equally suitable for intensive multimedia applications.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-6/var-som-mx6/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-mx6-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-6/var-som-mx6/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2017/12/VAR-SOM-MX6-quick-start-guide.pdf",
+    "machines": [
+      "var-som-mx6",
+      "var_som_mx6"
+    ],
+    "dtbs": [
+      "imx6dl-var-som-res.dtb",
+      "imx6dl-var-som-symphony.dtb"
+    ],
+    "carriers": [
+      "Symphony-Board",
+      "VAR-MX6CustomBoard"
+    ],
+    "image_url": "/boards/VAR-SOM-MX6.png"
+  },
+  {
+    "name": "VAR-SOM-MX7",
+    "soc": "i.MX 7Dual",
+    "description": "Supporting the i.MX 7Dual, the VAR-SOM-MX7 allows designers to use a single System on Module in a broad range of applications to achieve short time-to-market for their current innovations, while still accommodating potential R&D directions and marketing opportunities. This versatile solution’s -20 to 85 °C temperature range and Dual CAN support is ideal for industrial applications.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-7/var-som-mx7/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-mx7-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-7/var-som-mx7/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2018/02/VAR-SOM-MX7-quick-start-guide.pdf",
+    "machines": [
+      "imx7-var-som",
+      "imx7_var_som"
+    ],
+    "dtbs": [
+      "imx7d-var-som-emmc.dtb",
+      "imx7d-var-som-nand.dtb"
+    ],
+    "carriers": [
+      "VAR-MX7CustomBoard"
+    ],
+    "image_url": "/boards/VAR-SOM-MX7.png"
+  },
+  {
+    "name": "VAR-SOM-MX8",
+    "soc": "i.MX 8 QuadMax/QuadPlus",
+    "description": "Supporting the i.MX 8 QuadMax/QuadPlus, the VAR-SOM-MX8 is pin-compatible with the VAR-SOM-MX8X, VAR-SOM-MX6 and VAR-SOM-SOLO/DUAL. Allowing Variscite's customers to use the same system design with full scalability, from entry level – i.MX6 Solo and Dual lite, through i.MX6 Dual, Quad and QuadPlus, and right up to i.MX8 QuadMax. This highly scalable solution introduces advanced processing power, high-end graphics, UltraHD video capabilities, USB3, CAN FD and a variety of other high-speed interfaces and connectivity options.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8-quadmax-quadplus/var-som-mx8/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-mx8-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8-quadmax-quadplus/var-som-mx8/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2019/05/VAR-SOM-MX8-quick-start-guide.pdf",
+    "machines": [
+      "imx8qm-var-som",
+      "imx8qm_var_som"
+    ],
+    "dtbs": [
+      "imx8qm-var-som-symphony-lvds.dtb",
+      "imx8qm-var-som-symphony.dtb"
+    ],
+    "carriers": [
+      "Symphony-Board"
+    ],
+    "image_url": "/boards/VAR-SOM-MX8.png"
+  },
+  {
+    "name": "VAR-SOM-MX8M-MINI",
+    "soc": "i.MX 8M Mini",
+    "description": "Supporting the i.MX 8M Mini, the VAR-SOM-MX8M-MINI is compatible with the VAR-SOM Pin2Pin product family, providing a maximum scalability range, from entry-level with the i.MX 6UL/6ULL/6ULZ platform, through i.MX 6 platforms, i.MX 8X and up to i.MX 8QuadMax. The SoM offers advanced features and a variety of connectivity options including integrated HW engines supporting 1080p video encode and decode, 2D and 3D graphics, HQ audio, integrated certified single band or dual-band Wi-Fi, Bluetooth/BLE, 802.15.4, integrated CAN bus, LVDS and a variety of additional interfaces.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-mini/var-som-mx8m-mini/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-mx8m-mini-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-mini/var-som-mx8m-mini/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2019/12/VAR-SOM-MX8M-MINI-quick-start-guide.pdf",
+    "machines": [
+      "imx8mm-var-dart",
+      "imx8mm_var_dart"
+    ],
+    "dtbs": [
+      "imx8mm-var-som-symphony-1.x.dtb",
+      "imx8mm-var-som-symphony-m4.dtb",
+      "imx8mm-var-som-symphony.dtb"
+    ],
+    "carriers": [
+      "Symphony-Board",
+      "Symphony-Board v1.x"
+    ],
+    "image_url": "/boards/VAR-SOM-MX8M-MINI.png"
+  },
+  {
+    "name": "VAR-SOM-MX8M-NANO",
+    "soc": "i.MX 8M Nano",
+    "description": "Supporting the i.MX 8M Nano, the VAR-SOM-MX8M-NANO is compatible with the VAR-SOM Pin2Pin product family, providing a maximum scalability range, from entry-level with the i.MX 6UL/6ULL/6ULZ platform, through i.MX 6 platforms, i.MX 8X and up to i.MX 8QuadMax. The SoM offers advanced features and a variety of connectivity options including advanced 3D GPU, HQ audio, integrated certified single band 802.11 b/g/n or dual-band 802.11 ac/a/b/g/n Wi-Fi, integrated CAN bus, LVDS and a variety of additional interfaces.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-nano/var-som-mx8m-nano/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-mx8m-nano-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-nano/var-som-mx8m-nano/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2020/02/VAR-SOM-MX8M-NANO-quick-start-guide.pdf",
+    "machines": [
+      "imx8mn-var-som",
+      "imx8mn_var_som"
+    ],
+    "dtbs": [
+      "imx8mn-var-som-symphony-1.x.dtb",
+      "imx8mn-var-som-symphony-m7.dtb",
+      "imx8mn-var-som-symphony.dtb"
+    ],
+    "carriers": [
+      "Symphony-Board",
+      "Symphony-Board v1.x"
+    ],
+    "image_url": "/boards/VAR-SOM-MX8M-NANO.png"
+  },
+  {
+    "name": "VAR-SOM-MX8M-PLUS",
+    "soc": "i.MX 8M Plus",
+    "description": "Powered by the i.MX 8M Plus, the VAR-SOM-MX8M-PLUS presents the first generation of System on Modules with dedicated Artificial Intelligence (AI) / Machine Learning (ML) capabilities. The SoM supports advanced multimedia features along with extensive connectivity options such as H.265/H.264 Full HD video encoder/decoder, high performance 2D/3D GPU, up to 4K HDMI, dual LVDS, DSI, certified dual-band Wi-Fi, BT/BLE, 802.15.4, dual USB3, dual GbE, dual CAN-FD and PCIe.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-plus/var-som-mx8m-plus/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-mx8m-plus-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8m-plus/var-som-mx8m-plus/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2020/10/VAR-SOM-MX8M-PLUS-quick-start-guide.pdf",
+    "machines": [
+      "imx8mp-var-dart",
+      "imx8mp_var_dart"
+    ],
+    "dtbs": [
+      "imx8mp-var-som-symphony-1.x.dtb",
+      "imx8mp-var-som-symphony-m7.dtb",
+      "imx8mp-var-som-symphony.dtb"
+    ],
+    "carriers": [
+      "Symphony-Board",
+      "Symphony-Board v1.x"
+    ],
+    "image_url": "/boards/VAR-SOM-MX8M-PLUS.png"
+  },
+  {
+    "name": "VAR-SOM-MX8X",
+    "soc": "i.MX 8X",
+    "description": "Supporting NXP’s i.MX 8X with up to four 1.2GHz Cortex®-A35 processor cores plus a Cortex®-M4F real-time co-processor, the VAR-SOM-MX8X is pin-compatible with the VAR-SOM-MX8, VAR-SOM-MX6 and VAR-SOM-SOLO/DUAL. Allowing Variscite's customers a high level of scalability, extended lifetime availability and reduced development time, cost and risk. This highly scalable solution provides built-in safety features, highly integrated multimedia support and efficient power/performance architecture.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8x/var-som-mx8x/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-mx8x-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-8/i-mx-8x/var-som-mx8x/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2019/05/VAR-SOM-MX8X-quick-start-guide.pdf",
+    "machines": [
+      "imx8qxp-var-som",
+      "imx8qxp_var_som"
+    ],
+    "dtbs": [
+      "imx8qxp-var-som-symphony-sd.dtb",
+      "imx8qxp-var-som-symphony.dtb"
+    ],
+    "carriers": [
+      "Symphony-Board"
+    ],
+    "image_url": "/boards/VAR-SOM-MX8X.png"
+  },
+  {
+    "name": "VAR-SOM-MX91",
+    "soc": "i.MX 91",
+    "description": "The VAR-SOM-MX91 has a 1.4GHz Cortex®-A55 NXP i.MX 91 processor and offers energy-flex architecture and a cost-optimized solution for embedded designs in various applications. The SoM provides rich connectivity options such as dual CAN-FD, dual GbE, certified dual-band Wi-Fi 6 (802.11ax/ac/a/b/g/n), BT/BLE 5.4 and 802.15.4, along with industrial temperature grade.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-91/var-som-mx91/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-mx91-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-91/var-som-mx91/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2025/03/VAR-SOM-MX91-Quick-Start-Guide.pdf",
+    "machines": [
+      "imx91-var-som",
+      "imx91_var_som"
+    ],
+    "dtbs": [
+      "imx91-var-som-symphony-1.x.dtb",
+      "imx91-var-som-symphony.dtb"
+    ],
+    "carriers": [
+      "Symphony-Board",
+      "Symphony-Board v1.x"
+    ],
+    "image_url": "/boards/VAR-SOM-MX91.png"
+  },
+  {
+    "name": "VAR-SOM-MX93",
+    "soc": "i.MX 93",
+    "description": "The VAR-SOM-MX93 has a 1.7GHz Dual Cortex®-A55 NXP i.MX 93 processor with a 250MHz Cortex-M33 Real-time co-processor, a 0.5 TOPS AI/ML NPU and energy flex architecture for efficient processing. The SoM offers a rich set of connectivity options: camera inputs, audio in/out, ADC, 2× USB, certified dual-band Wi-Fi 6 (802.11ax/ac/a/b/g/n), BT/BLE 5.4, 802.15.4 and display outputs, along with 2× CAN bus, 2× GbE and industrial temperature grade.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-93/var-som-mx93/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-mx93-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-9/i-mx-93/var-som-mx93/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2022/12/VAR-SOM-MX93-quick-start-guide.pdf",
+    "machines": [
+      "imx93-var-som",
+      "imx93_var_som"
+    ],
+    "dtbs": [
+      "imx93-var-som-symphony-1.x.dtb",
+      "imx93-var-som-symphony-m33.dtb",
+      "imx93-var-som-symphony.dtb"
+    ],
+    "carriers": [
+      "Symphony-Board",
+      "Symphony-Board v1.x"
+    ],
+    "image_url": "/boards/VAR-SOM-MX93.png"
+  },
+  {
+    "name": "VAR-SOM-OM35",
+    "soc": "TI OMAP3530 / OMAP3503",
+    "description": "The VAR-SOM-OM35 is a low-power, high performance System-on-module which serves as a building block and easily integrates into any embedded solution. It includes an extensive range of interfaces and communication protocols and is ready to run any embedded operating system such as Linux and Windows Embedded CE.",
+    "documentation_url": "https://variscite.com/system-on-module-som/ti-omap3530/var-som-om35/#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/ti-omap3530/var-som-om35/#evaluation-kit",
+    "specifications_url": "https://variscite.com/system-on-module-som/ti-omap3530/var-som-om35/#highlights",
+    "quick_start_url": "",
+    "machines": [],
+    "dtbs": [],
+    "carriers": [
+      "VAR-3xCustomBoard"
+    ],
+    "image_url": "/boards/VAR-SOM-OM35.png"
+  },
+  {
+    "name": "VAR-SOM-OM37",
+    "soc": "TI DM3730 / AM3703",
+    "description": "The VAR-SOM-OM37 is a low-power, high performance System-on-module which serves as a building block and easily integrates into any embedded solution. It includes an extensive range of interfaces and communication protocols and is ready to run any embedded operating system such as Linux and Windows Embedded CE.",
+    "documentation_url": "https://variscite.com/system-on-module-som/ti-am3703-dm3730/var-som-om37/#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/ti-am3703-dm3730/var-som-om37/#evaluation-kit",
+    "specifications_url": "https://variscite.com/system-on-module-som/ti-am3703-dm3730/var-som-om37/#highlights",
+    "quick_start_url": "",
+    "machines": [
+      "var-som-om37",
+      "var_som_om37"
+    ],
+    "dtbs": [],
+    "carriers": [
+      "VAR-3xCustomBoard"
+    ],
+    "image_url": "/boards/VAR-SOM-OM37.png"
+  },
+  {
+    "name": "VAR-SOM-OM44",
+    "soc": "TI OMAP4460",
+    "description": "The VAR-SOM-OM44 Based on TI’s OMAP4460, 1.5GHz Dual-Core Cortex-A9. The fastest ARM System on Module on the market today. The VAR-SOM-OM44, offers an ideal solution for a wide range of applications which require rich multimedia functionality as well as high-processing power. This compact, cost effective and low consumption SoM offers a performance level of an Intel Atom.",
+    "documentation_url": "https://variscite.com/system-on-module-som/ti-omap4460/var-som-om44/#documentation",
+    "shop_url": "https://variscite.com/system-on-module-som/ti-omap4460/var-som-om44/#evaluation-kit",
+    "specifications_url": "https://variscite.com/system-on-module-som/ti-omap4460/var-som-om44/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2017/12/VAR-DVK-OM44_V0_91_Quick__Start_Guide_V1_0.pdf",
+    "machines": [
+      "var-som-om44",
+      "var_som_om44"
+    ],
+    "dtbs": [],
+    "carriers": [
+      "VAR-OM44CustomBoard"
+    ],
+    "image_url": "/boards/VAR-SOM-OM44.png"
+  },
+  {
+    "name": "VAR-SOM-SOLO-DUAL",
+    "soc": "i.MX 6Solo/DualLite",
+    "description": "Supporting the i.MX 6Solo and i.MX 6DualLite, the VAR-SOM-SOLO/DUAL allows designers to use a single System on Module in a broad range of applications to achieve short time-to-market for their current innovations, while still accommodating potential R&D directions and marketing opportunities. This versatile solution’s -40 to 85 °C temperature range and Dual CAN support is ideal for industrial applications, while 1080p video and graphics accelerations make it equally suitable for intensive multimedia applications.",
+    "documentation_url": "https://variscite.com/system-on-module-som/i-mx-6/var-som-solo-dual/#documentation",
+    "shop_url": "https://shop.variscite.com/product/evaluation-kit/var-som-solo-evaluation-kits/",
+    "specifications_url": "https://variscite.com/system-on-module-som/i-mx-6/var-som-solo-dual/#highlights",
+    "quick_start_url": "https://variscite.com/wp-content/uploads/2017/12/VAR-SOM-SOLO_DUAL-quick-start-guide.pdf",
+    "machines": [
+      "var-som-mx6",
+      "var_som_mx6"
+    ],
+    "dtbs": [
+      "imx6dl-var-som-solo-symphony.dtb",
+      "imx6dl-var-som-solo-vsc.dtb"
+    ],
+    "carriers": [
+      "Symphony-Board",
+      "VAR-SOLOCustomBoard"
+    ],
+    "image_url": "/boards/VAR-SOM-SOLO-DUAL.png"
+  }
+]

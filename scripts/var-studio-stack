@@ -1,0 +1,128 @@
+#!/bin/sh
+set -eu
+
+[ -r /etc/default/var-studio ] && . /etc/default/var-studio
+image="${VAR_STUDIO_IMAGE:-var-studio:local}"
+volume="var-studio-data"
+containers="var-studio var-studio-klog var-studio-gpu var-studio-npu"
+remove_containers() { for container in $containers; do docker rm -f \
+  "$container" >/dev/null 2>&1 || true; done; }
+common="--label com.variscite.var-studio=true --read-only --security-opt no-new-privileges:true --cap-drop ALL"
+
+wait_for_docker() {
+  attempt=0
+  while [ "$attempt" -lt 30 ]; do
+    docker info >/dev/null 2>&1 && return 0
+    attempt=$((attempt + 1))
+    sleep 1
+  done
+  printf 'Docker did not become ready.\n' >&2
+  return 1
+}
+
+wait_for_dashboard() {
+  attempt=0
+  while [ "$attempt" -lt 30 ]; do
+    if curl -fsS http://127.0.0.1:9090/api/v1/snapshot \
+      >/dev/null 2>&1; then
+      return 0
+    fi
+    if [ "$(docker inspect --format '{{.State.Running}}' \
+      var-studio 2>/dev/null || true)" != true ]; then
+      printf 'VAR-Studio container stopped during startup.\n' >&2
+      return 1
+    fi
+    attempt=$((attempt + 1))
+    sleep 1
+  done
+  printf 'VAR-Studio dashboard did not become ready.\n' >&2
+  return 1
+}
+
+start_stack() {
+  wait_for_docker
+  if ! docker image inspect "$image" >/dev/null 2>&1; then
+    printf 'VAR-Studio image %s is not installed.\n' "$image" >&2
+    exit 1
+  fi
+  docker volume create --label com.variscite.var-studio=true "$volume" >/dev/null
+  mkdir -p /run/var-studio-demo /run/var-studio-camera
+  remove_containers
+  os_release_mount=""
+  [ -f /usr/lib/os-release ] && \
+    os_release_mount="-v /usr/lib/os-release:/host/os-release:ro"
+  resolv_mount=""
+  [ -f /etc/resolv.conf ] && \
+    resolv_mount="-v /etc/resolv.conf:/host/resolv.conf:ro"
+  # shellcheck disable=SC2086
+  docker run -d --name var-studio --restart unless-stopped --network host \
+    $common --user 65532:65532 \
+    -e LISTEN_ADDR=:9090 -e HOST_PROC=/host/proc -e HOST_SYS=/host/sys -e \
+      HOST_ETC=/host/etc -e HISTORY_DIR=/data \
+    -e DEMO_SOCKET=/run/var-studio-demo/demo.sock -e \
+      CAMERA_SOCKET=/run/var-studio-camera/camera.sock \
+    -v /proc:/host/proc:ro -v /sys:/host/sys:ro -v /etc:/host/etc:ro \
+      $os_release_mount $resolv_mount \
+    -v /run/var-studio-demo:/run/var-studio-demo:ro -v \
+      /run/var-studio-camera:/run/var-studio-camera:ro -v "$volume":/data \
+        "$image" >/dev/null
+  if [ -e /dev/kmsg ]; then
+    # shellcheck disable=SC2086
+    docker run -d --name var-studio-klog --restart unless-stopped --network \
+      none $common --user 0:0 \
+      --cap-add SYSLOG --cap-add SETUID --cap-add SETGID -e \
+        SERVICE_MODE=kernel-log-spooler \
+      -e HOST_PROC=/host/proc -e HOST_KMSG=/host/dev/kmsg -e HISTORY_DIR=/data \
+      -v /proc:/host/proc:ro -v "$volume":/data --device \
+        /dev/kmsg:/host/dev/kmsg:r "$image" >/dev/null || true
+  fi
+  if [ -e /dev/galcore ] && [ -x /usr/bin/gputop ] && [ -f \
+    /usr/lib/libgpuperfcnt.so.1.4.0 ] && [ -f \
+      /usr/lib/ld-linux-aarch64.so.1 ] && [ -f /usr/lib/libc.so.6 ]; then
+    # shellcheck disable=SC2086
+    docker run -d --name var-studio-gpu --restart unless-stopped --network \
+      none $common --user 0:0 \
+      --cap-add DAC_OVERRIDE --cap-add CHOWN \
+      -e SERVICE_MODE=gpu-metrics-spooler -e HOST_PROC=/host/proc -e \
+        HISTORY_DIR=/data -e GPUTOP_PATH=/usr/bin/gputop \
+      -v /proc:/host/proc:ro -v /sys:/sys:ro -v \
+        /usr/bin/gputop:/usr/bin/gputop:ro \
+      -v /usr/lib/libgpuperfcnt.so.1.4.0:/usr/lib/libgpuperfcnt.so.1.4.0:ro \
+      -v /usr/lib/ld-linux-aarch64.so.1:/usr/lib/ld-linux-aarch64.so.1:ro \
+        -v /usr/lib/libc.so.6:/usr/lib/libc.so.6:ro \
+      -v "$volume":/data --device /dev/galcore:/dev/galcore "$image" \
+        >/dev/null || true
+  fi
+  # shellcheck disable=SC2086
+  docker run -d --name var-studio-npu --restart unless-stopped --network \
+    none $common --user 0:0 \
+    --cap-add DAC_OVERRIDE --cap-add CHOWN -e \
+      SERVICE_MODE=npu-metrics-spooler -e HOST_PROC=/host/proc \
+    -e HOST_SYS=/host/sys -e HISTORY_DIR=/data -v /proc:/host/proc:ro -v \
+      /sys:/host/sys:ro -v "$volume":/data "$image" >/dev/null
+  wait_for_dashboard
+}
+
+run_stack() {
+  start_stack
+  docker wait var-studio >/dev/null
+  printf 'VAR-Studio container exited; restarting stack.\n' >&2
+  return 1
+}
+
+case "${1:-start}" in
+  start) start_stack ;;
+  run) run_stack ;;
+  stop) for container in $containers; do docker stop "$container" \
+    >/dev/null 2>&1 || true; done ;;
+  remove)
+    remove_containers
+    for data_volume in "$volume" opt_var-studio-data var-studio_var-studio-data; do
+      docker volume rm "$data_volume" >/dev/null 2>&1 || true
+    done
+    ;;
+  *)
+    printf 'Usage: %s {start|run|stop|remove}\n' "$0" >&2
+    exit 2
+    ;;
+esac

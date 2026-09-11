@@ -1,0 +1,12 @@
+# Runtime data and generated support reports
+data/
+*.zip
+*.tar
+
+# Locally extracted or compiled binaries
+/var-scope
+/dashboard
+
+# Editor and operating-system metadata
+.DS_Store
+*.swp
