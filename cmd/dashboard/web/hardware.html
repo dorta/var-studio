@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Hardware Explorer · VAR-Studio</title>
+    <link rel="icon" type="image/png" href="/variscite-favicon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <link rel="stylesheet" href="/hardware.css" />
+    <link rel="stylesheet" href="/hardware-details.css" />
+    <link rel="stylesheet" href="/brand.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <div class="shell hardware-page">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="VAR-Studio dashboard">
+          <img
+            class="brand-logo"
+            src="/variscite-logo-black.svg"
+            alt="Variscite"
+          />
+          <span class="brand-product"
+            ><strong>Board Diagnostics</strong><small>VAR-STUDIO</small></span
+          >
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/">Dashboard</a>
+          <a href="/hardware.html" aria-current="page">Hardware</a>
+          <a href="/bsp.html">Board Support Package</a>
+          <a href="/lab.html">Lab</a><a href="/diagnostics.html">Diagnostics</a>
+          <a class="support-nav" href="/support.html">Support</a>
+        </nav>
+        <div class="status">
+          <span class="pulse"></span><span id="connection">Connecting</span
+          ><time id="clock">--:--:--</time>
+        </div>
+      </header>
+
+      <div class="explorer-toolbar">
+        <div>
+          <p class="eyebrow">DEVICE INVENTORY</p>
+          <h1>Hardware Explorer</h1>
+        </div>
+        <div class="toolbar-actions">
+          <button id="refresh" type="button">Refresh</button
+          ><button id="report" type="button">Generate report</button>
+        </div>
+      </div>
+
+      <main class="explorer">
+        <aside class="explorer-sidebar">
+          <label class="tree-search"
+            ><span>⌕</span
+            ><input
+              id="section-search"
+              type="search"
+              placeholder="Filter categories"
+              autocomplete="off"
+          /></label>
+          <nav id="section-tree" aria-label="Hardware categories">
+            <p class="loading">Reading system…</p>
+          </nav>
+        </aside>
+        <section class="explorer-content">
+          <header class="detail-header">
+            <div>
+              <p id="breadcrumb">Hardware</p>
+              <h2 id="detail-title">Loading…</h2>
+            </div>
+            <time id="updated-at">—</time>
+          </header>
+          <div id="detail-body" class="detail-body">
+            <div class="loading-state">
+              <i></i>
+              <p>Collecting board information</p>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <span>© 2025-2026 Variscite Ltd.</span>
+        <span><a href="https://github.com/dorta/var-studio/blob/main/LICENSE"
+          >Apache License 2.0</a> · Local data · no external telemetry</span>
+      </footer>
+    </div>
+    <script src="/hardware.js" defer></script>
+  </body>
+</html>

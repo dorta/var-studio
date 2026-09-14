@@ -1,0 +1,9 @@
+{
+  "id": "medical-vitals",
+  "name": "Medical Vitals",
+  "category": "connected-display",
+  "runtime": "Qt 6 Widgets",
+  "display": "Wayland",
+  "duration_seconds": 180,
+  "executable": "/opt/var-studio-demos/bin/medical-vitals"
+}

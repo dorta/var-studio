@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Board Diagnostics · VAR-Studio</title>
+    <link rel="icon" type="image/png" href="/variscite-favicon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <link rel="stylesheet" href="/brand.css" />
+    <link rel="stylesheet" href="/diagnostics.css" />
+  </head>
+  <body>
+    <div class="shell diagnostics-page">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="VAR-Studio dashboard">
+          <img
+            class="brand-logo"
+            src="/variscite-logo-black.svg"
+            alt="Variscite"
+          />
+          <span class="brand-product">
+            <strong>Board Diagnostics</strong><small>VAR-STUDIO</small>
+          </span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/">Dashboard</a><a href="/hardware.html">Hardware</a>
+          <a href="/bsp.html">Board Support Package</a>
+          <a href="/lab.html">Lab</a>
+          <a href="/diagnostics.html" aria-current="page">Diagnostics</a>
+          <a class="support-nav" href="/support.html">Support</a>
+        </nav>
+        <div class="status">
+          <span class="pulse"></span><span id="connection">Connecting</span>
+          <time id="clock">--:--:--</time>
+        </div>
+      </header>
+      <main>
+        <section class="diagnostics-hero">
+          <div>
+            <p class="section-label">BOARD DIAGNOSTICS</p>
+            <h1>Check your board</h1>
+            <p>
+              Confirm system health, investigate problems, and collect a
+              support report with the evidence needed for troubleshooting.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <button id="refresh-diagnostics" type="button">
+              Run diagnostics
+            </button>
+            <a href="/api/v1/support-report" download>
+              Download support report
+            </a>
+          </div>
+        </section>
+
+        <section class="health-overview">
+          <article id="health-orb" class="health-orb checking">
+            <span aria-hidden="true"></span>
+            <div>
+              <small>BOARD HEALTH</small>
+              <strong id="health-status">Checking the board</strong>
+              <p id="health-summary">Reading live system information…</p>
+            </div>
+          </article>
+          <div class="health-counts" aria-label="Diagnostic result counts">
+            <span><strong id="health-passed">—</strong>Passed</span>
+            <span><strong id="health-warnings">—</strong>Warnings</span>
+            <span><strong id="health-critical">—</strong>Critical</span>
+          </div>
+          <time id="health-time">Not evaluated yet</time>
+        </section>
+
+        <section class="diagnostic-panel attention-panel">
+          <header>
+            <div>
+              <p class="section-label">NEEDS ATTENTION</p>
+              <h2>Problems found</h2>
+              <p>Only items that may require action appear here.</p>
+            </div>
+            <span id="attention-count" class="tag">CHECKING</span>
+          </header>
+          <div id="attention-list" class="attention-list">
+            <p class="loading-copy">Checking for problems…</p>
+          </div>
+        </section>
+
+        <section class="diagnostics-grid">
+          <article class="diagnostic-panel checks-panel">
+            <header>
+              <div>
+                <p class="section-label">AUTOMATIC CHECKS</p>
+                <h2>Checks performed</h2>
+                <p>Select a check to see its evidence.</p>
+              </div>
+              <span id="check-count" class="tag">CHECKING</span>
+            </header>
+            <div id="health-checks" class="health-checks">
+              <p class="loading-copy">Evaluating checks…</p>
+            </div>
+          </article>
+
+          <article class="diagnostic-panel events-panel">
+            <header>
+              <div>
+                <p class="section-label">SYSTEM ACTIVITY</p>
+                <h2>Recent events</h2>
+                <p>Warnings that may help explain a board problem.</p>
+              </div>
+              <label class="event-filter">
+                <input id="show-all-events" type="checkbox" />
+                Show all events
+              </label>
+            </header>
+            <div id="event-list" class="event-list">
+              <p class="loading-copy">Reading system events…</p>
+            </div>
+          </article>
+        </section>
+
+        <section class="diagnostics-grid lower-grid">
+          <article class="diagnostic-panel guides-panel">
+            <header>
+              <div>
+                <p class="section-label">TROUBLESHOOTING</p>
+                <h2>Start with the symptom</h2>
+                <p>Follow checks selected for the problem you are seeing.</p>
+              </div>
+            </header>
+            <div class="guide-layout">
+              <nav id="guide-list" class="guide-list"></nav>
+              <div id="guide-detail" class="guide-detail">
+                <p class="loading-copy">Preparing guided checks…</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="diagnostic-panel actions-panel">
+            <header>
+              <div>
+                <p class="section-label">TARGETED CHECKS</p>
+                <h2>Run a specific test</h2>
+                <p>These tests are read-only and do not change the board.</p>
+              </div>
+            </header>
+            <div id="action-list" class="action-list"></div>
+            <div id="action-result" class="action-result hidden"></div>
+          </article>
+        </section>
+
+        <section class="support-callout">
+          <div>
+            <h2>Need more detail?</h2>
+            <p>
+              Explore detected devices in Hardware or download a local support
+              package. VAR-Studio does not upload board data.
+            </p>
+          </div>
+          <div>
+            <a href="/hardware.html">Open Hardware Explorer</a>
+            <a class="primary" href="/api/v1/support-report" download>
+              Download support report
+            </a>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <span>© 2025-2026 Variscite Ltd.</span>
+        <span><a href="https://github.com/dorta/var-studio/blob/main/LICENSE"
+          >Apache License 2.0</a> · Local data · no external telemetry</span>
+      </footer>
+    </div>
+    <script src="/diagnostics.js" defer></script>
+  </body>
+</html>

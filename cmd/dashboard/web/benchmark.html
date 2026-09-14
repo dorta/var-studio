@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      if (window.top === window.self)
+        window.location.replace("/lab.html?view=performance");
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Benchmark Lab · VAR-Studio</title>
+    <link rel="icon" type="image/png" href="/variscite-favicon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <link rel="stylesheet" href="/brand.css" />
+    <link rel="stylesheet" href="/benchmark.css" />
+  </head>
+  <link rel="stylesheet" href="/benchmark-focus.css" />
+  <body>
+    <div class="shell benchmark-page">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="VAR-Studio dashboard"
+          ><img
+            class="brand-logo"
+            src="/variscite-logo-black.svg"
+            alt="Variscite"
+          /><span class="brand-product"
+            ><strong>Board Diagnostics</strong><small>VAR-STUDIO</small></span
+          ></a
+        >
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/">Dashboard</a><a href="/hardware.html">Hardware</a
+          ><a href="/bsp.html">Board Support Package</a
+          ><a href="/lab.html">Lab</a><a href="/diagnostics.html">Diagnostics</a
+          ><a class="support-nav" href="/support.html">Support</a>
+        </nav>
+        <div class="status">
+          <span class="pulse"></span><span id="connection">Connecting</span
+          ><time id="clock">--:--:--</time>
+        </div>
+      </header>
+      <main>
+        <section class="benchmark-hero">
+          <div>
+            <p class="eyebrow">CONTROLLED TESTING</p>
+            <h1>Benchmark Lab</h1>
+            <p>
+              Run allowlisted workloads and inspect the exact CPU, GPU, NPU, and
+              memory impact of each test.
+            </p>
+          </div>
+          <span id="runner-state" class="tag">CHECKING</span>
+        </section>
+        <section class="benchmark-live-grid">
+          <article>
+            <span>CPU</span><strong id="live-cpu">—</strong
+            ><small>Board utilization</small>
+          </article>
+          <article>
+            <span>GPU</span><strong id="live-gpu">—</strong
+            ><small>Primary 3D engine</small>
+          </article>
+          <article id="live-npu-card" class="hidden">
+            <span>NPU</span><strong id="live-npu">—</strong
+            ><small>Neural accelerator</small>
+          </article>
+          <article>
+            <span>MEMORY</span><strong id="live-memory">—</strong
+            ><small>System memory used</small>
+          </article>
+        </section>
+        <section class="benchmark-panel">
+          <div class="benchmark-panel-head">
+            <div>
+              <p class="eyebrow">TEST WINDOW</p>
+              <h2>Performance timeline</h2>
+              <small id="chart-range">Waiting for metrics</small>
+            </div>
+            <div class="benchmark-legend">
+              <span><i class="cpu"></i>CPU</span
+              ><span><i class="gpu"></i>GPU</span
+              ><span id="benchmark-npu-legend" class="hidden"
+                ><i class="npu"></i>NPU</span
+              ><span><i class="memory"></i>Memory</span>
+            </div>
+          </div>
+          <div id="benchmark-chart" class="benchmark-chart">
+            <span class="chart-empty">Collecting synchronized metrics…</span>
+          </div>
+          <p class="chart-note">
+            The chart is automatically cropped around the selected test.
+            Continuous history remains available on the Dashboard.
+          </p>
+        </section>
+        <section class="benchmark-panel">
+          <div class="gpu-demos-head">
+            <div>
+              <p class="eyebrow">WORKLOAD CATALOG</p>
+              <h2>GPU benchmarks</h2>
+              <small
+                >Each action is predefined, time-limited, and rendered on the
+                connected display.</small
+              >
+            </div>
+            <span id="gpu-demo-state" class="tag">CHECKING</span>
+          </div>
+          <div
+            id="gpu-demo-progress"
+            class="gpu-demo-progress benchmark-focus hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="gpu-demo-progress-name"
+            aria-live="polite"
+          >
+            <div class="benchmark-focus-kicker">
+              <span><i></i> LIVE BENCHMARK SESSION</span
+              ><small>Allowlisted workload · automatic timeout</small>
+            </div>
+            <div class="benchmark-focus-heading">
+              <div>
+                <p>BENCHMARK IN PROGRESS</p>
+                <h2 id="gpu-demo-progress-name">GPU workload</h2>
+                <small id="gpu-demo-progress-detail"
+                  >Monitoring system performance</small
+                >
+              </div>
+              <div class="gpu-demo-countdown">
+                <strong id="gpu-demo-countdown">0:00</strong
+                ><span id="gpu-demo-countdown-label">remaining</span>
+              </div>
+            </div>
+            <div class="benchmark-session-live">
+              <span><small>CPU</small><strong id="session-cpu">—</strong></span
+              ><span><small>GPU</small><strong id="session-gpu">—</strong></span
+              ><span id="session-npu-card" class="hidden"
+                ><small>NPU</small><strong id="session-npu">—</strong></span
+              ><span
+                ><small>MEMORY</small
+                ><strong id="session-memory">—</strong></span
+              >
+            </div>
+            <div id="session-chart" class="session-chart">
+              <span class="chart-empty"
+                >Waiting for the first synchronized samples…</span
+              >
+            </div>
+            <div class="benchmark-focus-actions">
+              <span id="benchmark-focus-status"
+                >Capturing synchronized metrics</span
+              ><button id="gpu-demo-stop" type="button" class="gpu-stop">
+                Stop test
+              </button>
+            </div>
+            <div class="gpu-demo-progress-track" aria-hidden="true">
+              <i id="gpu-demo-progress-bar"></i>
+            </div>
+          </div>
+          <div id="gpu-demo-list" class="gpu-demo-list">
+            <article class="gpu-demo-card gpu-demo-skeleton">
+              <div class="gpu-demo-visual"></div>
+              <header><span></span><small></small></header>
+              <p></p>
+              <i></i>
+            </article>
+            <article class="gpu-demo-card gpu-demo-skeleton">
+              <div class="gpu-demo-visual"></div>
+              <header><span></span><small></small></header>
+              <p></p>
+              <i></i>
+            </article>
+            <article class="gpu-demo-card gpu-demo-skeleton">
+              <div class="gpu-demo-visual"></div>
+              <header><span></span><small></small></header>
+              <p></p>
+              <i></i>
+            </article>
+            <article class="gpu-demo-card gpu-demo-skeleton">
+              <div class="gpu-demo-visual"></div>
+              <header><span></span><small></small></header>
+              <p></p>
+              <i></i>
+            </article>
+          </div>
+          <details id="gpu-demo-result" class="gpu-demo-result hidden">
+            <summary>
+              <span id="gpu-demo-result-title">Last benchmark result</span
+              ><small id="gpu-demo-result-meta"></small>
+            </summary>
+            <div id="benchmark-summary" class="benchmark-summary"></div>
+            <pre id="gpu-demo-output"></pre>
+          </details>
+        </section>
+      </main>
+      <dialog id="gpu-demo-modal" class="product-modal gpu-demo-modal">
+        <div class="product-modal-head">
+          <div>
+            <p>CONTROLLED BENCHMARK</p>
+            <h2 id="gpu-demo-modal-title">Run benchmark</h2>
+          </div>
+          <button
+            id="gpu-demo-modal-close"
+            type="button"
+            aria-label="Close benchmark confirmation"
+          >
+            ×
+          </button>
+        </div>
+        <div class="gpu-demo-modal-body">
+          <p id="gpu-demo-modal-description"></p>
+          <dl class="gpu-demo-modal-facts">
+            <div>
+              <dt>Graphics API</dt>
+              <dd id="gpu-demo-modal-api">—</dd>
+            </div>
+            <div>
+              <dt>Maximum duration</dt>
+              <dd id="gpu-demo-modal-duration">—</dd>
+            </div>
+          </dl>
+          <div class="gpu-demo-notice">
+            <span>DISPLAY</span>
+            <p>
+              The workload opens on the display connected to this board. CPU,
+              GPU, NPU, and memory are recorded automatically when their
+              collectors are available.
+            </p>
+          </div>
+        </div>
+        <div class="gpu-demo-modal-actions">
+          <button id="gpu-demo-modal-cancel" type="button">Cancel</button
+          ><button id="gpu-demo-modal-run" type="button">Run benchmark</button>
+        </div>
+      </dialog>
+      <footer>
+        <span>© 2025-2026 Variscite Ltd.</span>
+        <span><a href="https://github.com/dorta/var-studio/blob/main/LICENSE"
+          >Apache License 2.0</a> · Local data · no external telemetry</span>
+      </footer>
+    </div>
+    <script src="/benchmark.js" defer></script>
+  </body>
+</html>

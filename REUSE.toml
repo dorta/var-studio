@@ -1,0 +1,16 @@
+version = 1
+
+[[annotations]]
+path = "**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025-2026 Variscite Ltd."
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "cmd/dashboard/web/icons/**"
+precedence = "override"
+SPDX-FileCopyrightText = [
+  "2013-present Cole Bemis",
+  "2026 Lucide Icons and Contributors",
+]
+SPDX-License-Identifier = "ISC AND MIT"

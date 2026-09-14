@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      if (window.top === window.self)
+        window.location.replace("/lab.html?view=demos");
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Demo Lab · VAR-Studio</title>
+    <link rel="icon" type="image/png" href="/variscite-favicon.png" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/nav.css" />
+    <link rel="stylesheet" href="/brand.css" />
+    <link rel="stylesheet" href="/demo.css" />
+  </head>
+  <body>
+    <div class="shell demo-page">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="VAR-Studio dashboard"
+          ><img
+            class="brand-logo"
+            src="/variscite-logo-black.svg"
+            alt="Variscite"
+          /><span class="brand-product"
+            ><strong>Board Diagnostics</strong><small>VAR-STUDIO</small></span
+          ></a
+        >
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="/">Dashboard</a><a href="/hardware.html">Hardware</a
+          ><a href="/bsp.html">Board Support Package</a
+          ><a href="/lab.html">Lab</a><a href="/diagnostics.html">Diagnostics</a
+          ><a class="support-nav" href="/support.html">Support</a>
+        </nav>
+        <div class="status">
+          <span class="pulse"></span><span id="connection">Connecting</span
+          ><time id="clock">--:--:--</time>
+        </div>
+      </header>
+      <main>
+        <section class="demo-hero">
+          <div>
+            <p class="eyebrow">CAPABILITY-AWARE EXPERIENCES</p>
+            <h1>Demo Lab</h1>
+            <p>
+              Interact with the hardware that this board actually exposes. Every
+              experience is local, explicit, and enabled only after capability
+              detection.
+            </p>
+          </div>
+          <div class="hero-capability">
+            <span id="available-count">—</span><small>EXPERIENCES READY</small>
+          </div>
+        </section>
+        <section id="demo-catalog" class="demo-catalog" aria-live="polite">
+          <p class="demo-loading">Detecting board capabilities…</p>
+        </section>
+        <section id="display-experience" class="display-experience" hidden>
+          <div class="display-run-mark" aria-hidden="true">
+            <span></span>
+          </div>
+          <div class="display-run-copy">
+            <p class="eyebrow">CONNECTED DISPLAY</p>
+            <h2 id="display-demo-name">Native demo</h2>
+            <p id="display-demo-message">
+              The application is running on the display connected to this EVK.
+            </p>
+          </div>
+          <div class="display-run-time">
+            <strong id="display-demo-time">—</strong>
+            <small id="display-demo-state">STARTING</small>
+          </div>
+          <button id="stop-display-demo" type="button">
+            Stop on board
+          </button>
+          <div class="display-run-track" aria-hidden="true">
+            <span id="display-demo-progress"></span>
+          </div>
+        </section>
+        <section id="camera-experience" class="experience-panel" hidden>
+          <header>
+            <div>
+              <p class="eyebrow">VISION EXPERIENCE</p>
+              <h2>Camera capture studio</h2>
+              <p>
+                Open a local stream, freeze a frame, then download or share it.
+                Captures never leave the browser automatically.
+              </p>
+            </div>
+            <span id="camera-live" class="experience-state">STANDBY</span>
+          </header>
+          <div class="camera-workspace">
+            <div id="demo-preview" class="demo-preview empty">
+              <div id="preview-message">
+                <span>CAM</span><strong>Select a capture device</strong>
+                <p>The live image will appear here.</p>
+              </div>
+              <img id="demo-camera-stream" alt="Live camera preview" />
+            </div>
+            <aside>
+              <label for="camera-device">Capture device</label>
+              <select id="camera-device">
+                <option>Detecting cameras…</option>
+              </select>
+              <div class="camera-actions">
+                <button id="open-camera" type="button">Open live view</button
+                ><button id="capture-frame" type="button" disabled>
+                  Capture frame
+                </button>
+              </div>
+              <div id="capture-result" class="capture-result" hidden>
+                <canvas id="capture-canvas"></canvas>
+                <div>
+                  <strong>Frame captured locally</strong>
+                  <p id="capture-meta">—</p>
+                </div>
+                <button id="download-capture" type="button">Download</button
+                ><button id="share-capture" type="button">Share capture</button>
+              </div>
+              <p class="privacy-note">
+                No cloud service, SMTP credential, or background upload is used.
+              </p>
+            </aside>
+          </div>
+        </section>
+        <section
+          id="ml-experience"
+          class="experience-panel ml-experience"
+          hidden
+        >
+          <header>
+            <div>
+              <p class="eyebrow">EDGE AI EXPERIENCE</p>
+              <h2>MobileNet NPU classification</h2>
+              <p>
+                Run the reference TensorFlow Lite model included in this BSP
+                through the Vivante VX delegate. The workload is fixed, local,
+                and time-limited.
+              </p>
+            </div>
+            <span id="ml-state" class="experience-state">READY</span>
+          </header>
+          <div class="ml-workspace">
+            <article class="ml-model-card">
+              <div class="ml-model-mark">AI</div>
+              <div>
+                <p class="eyebrow">MODEL</p>
+                <h3>MobileNet v1 · Quantized</h3>
+                <p>
+                  Classifies the packaged Grace Hopper reference image using the
+                  image and labels supplied by the running BSP.
+                </p>
+              </div>
+              <dl>
+                <div>
+                  <dt>Runtime</dt>
+                  <dd>TensorFlow Lite 2.16</dd>
+                </div>
+                <div>
+                  <dt>Delegate</dt>
+                  <dd>Vivante VX</dd>
+                </div>
+                <div>
+                  <dt>Target</dt>
+                  <dd>i.MX8M Plus NPU</dd>
+                </div>
+              </dl>
+              <button id="run-ml" type="button">Run NPU inference</button>
+            </article>
+            <article class="ml-result-card">
+              <div class="ml-result-head">
+                <div>
+                  <p class="eyebrow">CONTROLLED RUN</p>
+                  <h3 id="ml-result-summary">
+                    Ready to classify the packaged reference image on the NPU.
+                  </h3>
+                </div>
+                <strong id="ml-countdown">8 second controlled run</strong>
+              </div>
+              <div class="ml-progress" aria-hidden="true"><span></span></div>
+              <pre id="ml-output">No inference run yet.</pre>
+            </article>
+          </div>
+        </section>
+        <section class="experience-panel capability-explainer">
+          <header>
+            <div>
+              <p class="eyebrow">PORTABLE BY DESIGN</p>
+              <h2>Why some demos are unavailable</h2>
+            </div>
+          </header>
+          <div class="explainer-grid">
+            <article>
+              <span>01</span><strong>Kernel interface</strong>
+              <p>The required device node or sysfs class must exist.</p>
+            </article>
+            <article>
+              <span>02</span><strong>Runtime support</strong>
+              <p>
+                The image must include the matching safe runner or userspace
+                library.
+              </p>
+            </article>
+            <article>
+              <span>03</span><strong>Explicit action</strong>
+              <p>
+                Hardware workloads start only after a user request and remain
+                time-limited.
+              </p>
+            </article>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <span>© 2025-2026 Variscite Ltd.</span>
+        <span><a href="https://github.com/dorta/var-studio/blob/main/LICENSE"
+          >Apache License 2.0</a> · Local data · no external telemetry</span>
+      </footer>
+    </div>
+    <script src="/demo.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+services:
+  var-studio:
+    build:
+      context: .
+    image: ${VAR_STUDIO_IMAGE:-var-studio:experimental}
+    container_name: var-studio
+    restart: unless-stopped
+    network_mode: host
+    read_only: true
+    user: "65532:65532"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      LISTEN_ADDR: ":9090"
+      HOST_PROC: /host/proc
+      HOST_SYS: /host/sys
+      HOST_ETC: /host/etc
+      HISTORY_DIR: /data
+      DEMO_SOCKET: /run/var-studio-demo/demo.sock
+      CAMERA_SOCKET: /run/var-studio-camera/camera.sock
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /etc:/host/etc:ro
+      - /usr/lib/os-release:/host/os-release:ro
+      - /etc/resolv.conf:/host/resolv.conf:ro
+      - /run/var-studio-demo:/run/var-studio-demo:ro
+      - /run/var-studio-camera:/run/var-studio-camera:ro
+      - var-studio-data:/data
+
+  var-studio-klog:
+    image: ${VAR_STUDIO_IMAGE:-var-studio:experimental}
+    container_name: var-studio-klog
+    restart: unless-stopped
+    network_mode: none
+    read_only: true
+    user: "0:0"
+    cap_drop:
+      - ALL
+    cap_add:
+      - SYSLOG
+      - SETUID
+      - SETGID
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      SERVICE_MODE: kernel-log-spooler
+      HOST_PROC: /host/proc
+      HOST_KMSG: /host/dev/kmsg
+      HISTORY_DIR: /data
+    volumes:
+      - /proc:/host/proc:ro
+      - var-studio-data:/data
+    devices:
+      - /dev/kmsg:/host/dev/kmsg:r
+
+  var-studio-gpu:
+    image: ${VAR_STUDIO_IMAGE:-var-studio:experimental}
+    container_name: var-studio-gpu
+    restart: unless-stopped
+    network_mode: none
+    read_only: true
+    user: "0:0"
+    cap_drop:
+      - ALL
+    cap_add:
+      - DAC_OVERRIDE
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      SERVICE_MODE: gpu-metrics-spooler
+      HOST_PROC: /host/proc
+      HISTORY_DIR: /data
+      GPUTOP_PATH: /usr/bin/gputop
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/sys:ro
+      - /usr/bin/gputop:/usr/bin/gputop:ro
+      - /usr/lib/libgpuperfcnt.so.1.4.0:/usr/lib/libgpuperfcnt.so.1.4.0:ro
+      - /usr/lib/ld-linux-aarch64.so.1:/usr/lib/ld-linux-aarch64.so.1:ro
+      - /usr/lib/libc.so.6:/usr/lib/libc.so.6:ro
+      - var-studio-data:/data
+    devices:
+      - /dev/galcore:/dev/galcore
+
+  var-studio-npu:
+    image: ${VAR_STUDIO_IMAGE:-var-studio:experimental}
+    container_name: var-studio-npu
+    restart: unless-stopped
+    network_mode: none
+    read_only: true
+    user: "0:0"
+    cap_drop:
+      - ALL
+    cap_add:
+      - DAC_OVERRIDE
+      - CHOWN
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      SERVICE_MODE: npu-metrics-spooler
+      HOST_PROC: /host/proc
+      HOST_SYS: /host/sys
+      HISTORY_DIR: /data
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - var-studio-data:/data
+
+volumes:
+  var-studio-data:

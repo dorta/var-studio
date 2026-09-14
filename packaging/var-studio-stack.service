@@ -1,0 +1,21 @@
+[Unit]
+Description=VAR-Studio container stack
+Requires=docker.service
+After=docker.service
+After=var-studio-demo-runner.service
+After=var-studio-camera-runner.service
+Wants=var-studio-demo-runner.service
+Wants=var-studio-camera-runner.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/default/var-studio
+ExecStart=/opt/var-studio/bin/var-studio-stack run
+ExecStop=/opt/var-studio/bin/var-studio-stack stop
+TimeoutStopSec=90
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

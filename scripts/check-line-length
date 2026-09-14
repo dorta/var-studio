@@ -1,0 +1,24 @@
+#!/bin/sh
+set -eu
+
+violations="$(
+  git ls-files |
+  while IFS= read -r file; do
+    case "$file" in
+      *.go | *.sh | *.js | *.css | *.html | *.yaml | *.yml) ;;
+      Dockerfile | Makefile) ;;
+      *) continue ;;
+    esac
+    awk \
+      -v path="$file" \
+      'length($0) > 80 { printf "%s:%d:%s\n", path, NR, $0 }' \
+      "$file"
+  done
+)"
+
+if [ -n "$violations" ]; then
+  printf 'Lines longer than 80 columns:\n%s\n' "$violations" >&2
+  exit 1
+fi
+
+printf 'All source lines are within 80 columns.\n'

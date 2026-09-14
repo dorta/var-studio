@@ -1,0 +1,7 @@
+.git
+.gitignore
+README.adoc
+docs
+*.tar
+var-scope
+dashboard

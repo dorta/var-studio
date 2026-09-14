@@ -1,0 +1,331 @@
+.hardware-page {
+  min-height: 100vh;
+}
+.explorer-toolbar {
+  min-height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 2px;
+}
+.explorer-toolbar .eyebrow {
+  margin-bottom: 6px;
+}
+.explorer-toolbar h1 {
+  font-size: 29px;
+  letter-spacing: -0.045em;
+  margin: 0;
+}
+.toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+.toolbar-actions button {
+  border: 1px solid var(--line);
+  background: rgba(14, 32, 50, 0.75);
+  color: #b8cadd;
+  border-radius: 7px;
+  padding: 9px 12px;
+  font: 11px inherit;
+  cursor: pointer;
+}
+.toolbar-actions button:hover {
+  border-color: rgba(54, 169, 255, 0.4);
+  color: white;
+}
+.toolbar-actions button:last-child {
+  background: rgba(54, 169, 255, 0.12);
+  color: #cbe8ff;
+}
+.explorer {
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  min-height: 680px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(7, 20, 33, 0.7);
+  box-shadow: 0 24px 65px rgba(0, 0, 0, 0.16);
+}
+.explorer-sidebar {
+  background: rgba(8, 23, 38, 0.86);
+  border-right: 1px solid var(--line);
+  padding: 16px 10px;
+  overflow: auto;
+}
+.tree-search {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 6px 14px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: rgba(2, 11, 20, 0.35);
+  color: var(--muted);
+}
+.tree-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: 11px inherit;
+}
+.tree-search input::placeholder {
+  color: #63798e;
+}
+.tree-group {
+  margin: 0 0 13px;
+}
+.tree-group h3 {
+  margin: 0;
+  padding: 8px 10px 5px;
+  font-size: 9px;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: #59738b;
+}
+.tree-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  color: #91a7bc;
+  padding: 8px 10px;
+  border-radius: 6px;
+  text-align: left;
+  font: 11px inherit;
+  cursor: pointer;
+  transition:
+    background 0.14s,
+    color 0.14s;
+}
+.tree-item:hover {
+  color: #d9e9f8;
+  background: rgba(255, 255, 255, 0.025);
+}
+.tree-item.active {
+  color: white;
+  background: linear-gradient(
+    90deg,
+    rgba(54, 169, 255, 0.18),
+    rgba(54, 169, 255, 0.05)
+  );
+  box-shadow: inset 2px 0 var(--blue);
+}
+.tree-icon {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  background: rgba(135, 166, 196, 0.08);
+  color: #7e9bb7;
+  font-size: 9px;
+  font-weight: 700;
+}
+.tree-item.active .tree-icon {
+  color: var(--blue);
+  background: rgba(54, 169, 255, 0.12);
+}
+.loading {
+  color: var(--muted);
+  font-size: 11px;
+  padding: 12px;
+}
+.explorer-content {
+  min-width: 0;
+  background: linear-gradient(
+    145deg,
+    rgba(13, 30, 48, 0.76),
+    rgba(7, 20, 33, 0.76)
+  );
+}
+.detail-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  border-bottom: 1px solid var(--line);
+}
+.detail-header p {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--blue);
+  text-transform: uppercase;
+  margin: 0 0 5px;
+}
+.detail-header h2 {
+  font-size: 18px;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.detail-header time {
+  font-size: 9px;
+  color: #63798e;
+}
+.detail-body {
+  padding: 22px 25px 35px;
+}
+.info-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-bottom: 24px;
+}
+.info-row {
+  min-height: 61px;
+  padding: 12px 14px;
+  border: 1px solid rgba(149, 181, 215, 0.1);
+  border-radius: 7px;
+  background: rgba(2, 12, 21, 0.22);
+}
+.info-row dt {
+  font-size: 9px;
+  color: #6f879e;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin-bottom: 7px;
+}
+.info-row dd {
+  font-size: 12px;
+  color: #d9e8f6;
+  margin: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+.hardware-table-block {
+  margin-top: 22px;
+}
+.hardware-table-block:first-child {
+  margin-top: 0;
+}
+.hardware-table-block h3 {
+  font-size: 11px;
+  color: #9db2c6;
+  margin: 0 0 9px;
+  font-weight: 600;
+}
+.hardware-table-scroll {
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid rgba(149, 181, 215, 0.1);
+  border-radius: 7px;
+}
+.hardware-table {
+  min-width: 640px;
+  background: rgba(3, 13, 22, 0.2);
+}
+.hardware-table th {
+  position: sticky;
+  top: 0;
+  background: #0b1d2e;
+  white-space: nowrap;
+}
+.hardware-table td {
+  max-width: 420px;
+  overflow-wrap: anywhere;
+  vertical-align: top;
+  color: #afc2d4;
+}
+.hardware-table tbody tr:hover {
+  background: rgba(54, 169, 255, 0.025);
+}
+.no-data {
+  padding: 28px;
+  border: 1px dashed rgba(149, 181, 215, 0.14);
+  border-radius: 7px;
+  color: #687f95;
+  font-size: 11px;
+  text-align: center;
+}
+.loading-state {
+  min-height: 420px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+}
+.loading-state i {
+  width: 28px;
+  height: 28px;
+  margin: auto;
+  border: 2px solid rgba(54, 169, 255, 0.15);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 850px) {
+  .explorer {
+    grid-template-columns: 220px 1fr;
+  }
+  .info-fields {
+    grid-template-columns: 1fr;
+  }
+  .detail-body {
+    padding: 18px;
+  }
+  .detail-header {
+    padding: 0 18px;
+  }
+}
+@media (max-width: 650px) {
+  .explorer-toolbar {
+    min-height: 96px;
+  }
+  .explorer-toolbar h1 {
+    font-size: 23px;
+  }
+  .toolbar-actions button:first-child {
+    display: none;
+  }
+  .explorer {
+    display: block;
+    border-radius: 9px;
+  }
+  .explorer-sidebar {
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    max-height: 230px;
+  }
+  .tree-search {
+    margin-bottom: 8px;
+  }
+  .tree-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 6px;
+  }
+  .tree-group h3 {
+    width: 100%;
+    padding-left: 4px;
+  }
+  .tree-item {
+    width: auto;
+    padding: 7px 9px;
+  }
+  .tree-icon {
+    display: none;
+  }
+  .detail-header {
+    height: 70px;
+  }
+  .detail-header time {
+    display: none;
+  }
+  .detail-body {
+    padding: 14px;
+  }
+}
